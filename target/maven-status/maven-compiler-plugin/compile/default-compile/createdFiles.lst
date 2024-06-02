@@ -1,0 +1,6 @@
+com\chocoshop\service\ProductService.class
+com\chocoshop\model\dto\ProductDtoImpl.class
+com\chocoshop\controller\ProductController.class
+com\chocoshop\model\po\Product.class
+com\chocoshop\ChocoShopApplication.class
+com\chocoshop\model\dto\ProductDto.class
