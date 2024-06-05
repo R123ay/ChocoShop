@@ -23,7 +23,7 @@ public class ProductController {
     private ProductService productService; // 自動注入 ProductService 服務
 
     @GetMapping("/index")
-    public String getIntex(Model model) {
+    public String getIndex(Model model) {
         return "index"; // 返回 index.jsp 視圖
     }
 
