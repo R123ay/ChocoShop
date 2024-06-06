@@ -3,63 +3,57 @@ package com.chocoshop.model.po;
 import java.util.List;
 
 public class Order {
-    private Integer id;
-    private String customerName;
-    private String customerEmail;
-    private List<OrderItem> items;
+	private Integer id;
+	private Integer customerId;
+	private Double totalPrice;
+	private String status;
+	private List<OrderItem> items;
 
-    // getter 和 setter 方法
-    public Integer getId() {
-        return id;
-    }
+	// Getters and setters
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getCustomerName() {
-        return customerName;
-    }
+	public Integer getCustomerId() {
+		return customerId;
+	}
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
 
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 
-    public List<OrderItem> getItems() {
-        return items;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setItems(List<OrderItem> items) {
-        this.items = items;
-    }
-}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-public class OrderItem {
-    private Integer productId;
-    private Integer quantity;
+	public List<OrderItem> getItems() {
+		return items;
+	}
 
-    // getter 和 setter 方法
-    public Integer getProductId() {
-        return productId;
-    }
+	public void setItems(List<OrderItem> items) {
+		this.items = items;
+	}
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", customerId=" + customerId + ", totalPrice=" + totalPrice + ", status=" + status
+				+ ", items=" + items + "]";
+	}
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
 }

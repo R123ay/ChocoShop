@@ -10,12 +10,9 @@ import com.chocoshop.model.po.Order;
 
 @Service
 public class OrderService {
+	
     @Autowired
     private OrderDto orderDto;
-
-    public Integer saveOrder(Order order) {
-        return orderDto.add(order);
-    }
 
     public List<Order> getAllOrders() {
         return orderDto.findAll();
@@ -23,6 +20,10 @@ public class OrderService {
 
     public Order getOrderById(Integer id) {
         return orderDto.findById(id);
+    }
+
+    public Integer saveOrder(Order order) {
+        return orderDto.add(order);
     }
 
     public Integer deleteOrder(Integer id) {
