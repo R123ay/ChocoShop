@@ -10,6 +10,13 @@ public class Order {
 	private List<OrderItem> items;
 
 	// Getters and setters
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", customerId=" + customerId + ", totalPrice=" + totalPrice + ", status=" + status
+				+ ", items=" + items + "]";
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -48,12 +55,6 @@ public class Order {
 
 	public void setItems(List<OrderItem> items) {
 		this.items = items;
-	}
-
-	@Override
-	public String toString() {
-		return "Order [id=" + id + ", customerId=" + customerId + ", totalPrice=" + totalPrice + ", status=" + status
-				+ ", items=" + items + "]";
 	}
 
 }

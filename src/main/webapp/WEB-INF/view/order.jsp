@@ -42,11 +42,11 @@
     <form method="post" action="${pageContext.request.contextPath}/orders">
         <h2>Add Order</h2>
         <label for="customerId">Customer ID:</label>
-        <input type="text" id="customerId" name="customerId">
+        <input type="number" id="customerId" name="customerId" required>
         <label for="totalPrice">Total Price:</label>
-        <input type="number" id="totalPrice" name="totalPrice" step="0.01">
+        <input type="number" id="totalPrice" name="totalPrice" step="0.01" required>
         <label for="status">Status:</label>
-        <input type="text" id="status" name="status">
+        <input type="text" id="status" name="status" required>
         <button type="submit">Add Order</button>
     </form>
 </body>
