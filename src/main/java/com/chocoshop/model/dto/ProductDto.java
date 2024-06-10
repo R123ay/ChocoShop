@@ -1,15 +1,23 @@
 package com.chocoshop.model.dto;
 
 import java.util.List;
-
-import org.springframework.stereotype.Repository;
-
 import com.chocoshop.model.po.Product;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProductDto {
-	List<Product> findAll(); // 取得產品編號
-	Product findById(Integer id); // 取得產品名稱
-	Integer add(Product product); // 取得產品價格
-	Integer deleteById(Integer id); // 刪除一個產品
+    // 取得所有產品
+    List<Product> findAll();
+    
+    // 根據ID取得產品
+    Product findById(Integer id);
+    
+    // 添加新產品
+    Integer add(Product product);
+    
+    // 更新產品資料
+    Integer update(Product product);
+    
+    // 根據ID刪除產品
+    Integer deleteById(Integer id);
 }

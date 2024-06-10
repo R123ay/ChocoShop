@@ -4,46 +4,51 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model; // 用於將數據傳遞給視圖層
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import com.chocoshop.model.po.Product;
 import com.chocoshop.service.ProductService;
 
 @Controller
-@RequestMapping("/api/products") // 基礎路徑 /api/products
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
-    private ProductService productService; // 自動注入 ProductService 服務
-
-    @GetMapping("/index")
-    public String getIndex(Model model) {
-        return "index"; // 返回 index.jsp 視圖
-    }
+    private ProductService productService;
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts(); // 返回所有產品
+    public String getAllProducts(Model model) {
+        List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        return "product"; // 連結到 product.jsp
     }
 
-    @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Integer id) {
-        return productService.getProductById(id); // 根據 id 獲取產品
+    @PostMapping("/add")
+    public String addProduct(@RequestParam String name, @RequestParam String description, @RequestParam double price) {
+        Product product = new Product();
+        product.setName(name);
+        product.setDescription(description);
+        product.setPrice(price);
+        productService.saveProduct(product);
+        return "redirect:/products"; // 添加後重定向到產品列表頁面
     }
 
-    @PostMapping
-    public Integer createProduct(@RequestBody Product product) {
-        return productService.saveProduct(product); // 創建新產品
+    @PostMapping("/delete")
+    public String deleteProduct(@RequestParam Integer id) {
+        productService.deleteProduct(id);
+        return "redirect:/products"; // 刪除後重定向到產品列表頁面
     }
 
-    @DeleteMapping("/{id}")
-    public Integer deleteProduct(@PathVariable Integer id) {
-        return productService.deleteProduct(id); // 根據 id 刪除產品
+    @PostMapping("/update")
+    public String updateProduct(@RequestParam Integer id, @RequestParam String name, @RequestParam String description, @RequestParam double price) {
+        Product product = productService.getProductById(id);
+        if (product != null) {
+            product.setName(name);
+            product.setDescription(description);
+            product.setPrice(price);
+            productService.saveProduct(product);
+        }
+        return "redirect:/products"; // 更新後重定向到產品列表頁面
     }
 }

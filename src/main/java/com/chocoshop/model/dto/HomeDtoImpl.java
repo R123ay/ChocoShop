@@ -1,22 +1,25 @@
 package com.chocoshop.model.dto;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import com.chocoshop.model.po.Product;
 
 @Repository
-public class ProductDtoImpl implements ProductDto {
-
+public class HomeDtoImpl implements HomeDto {
+	
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-
+    JdbcTemplate jdbcTemplate;
+	
     @Override
     public List<Product> findAll() {
-        String sql = "SELECT * FROM products";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
+        String sql = "SELECT * FROM products"; // 需要使用實際的表名
+        List<Product> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
+        return list;
     }
 
     @Override
@@ -29,12 +32,6 @@ public class ProductDtoImpl implements ProductDto {
     public Integer add(Product product) {
         String sql = "INSERT INTO products (name, description, price) VALUES (?, ?, ?)";
         return jdbcTemplate.update(sql, product.getName(), product.getDescription(), product.getPrice());
-    }
-
-    @Override
-    public Integer update(Product product) {
-        String sql = "UPDATE products SET name = ?, description = ?, price = ? WHERE id = ?";
-        return jdbcTemplate.update(sql, product.getName(), product.getDescription(), product.getPrice(), product.getId());
     }
 
     @Override

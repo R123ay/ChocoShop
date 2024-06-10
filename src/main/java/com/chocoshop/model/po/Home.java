@@ -1,20 +1,11 @@
 package com.chocoshop.model.po;
 
-public class Product {
-    private Integer id; // 產品ID
-    private String name; // 產品名稱
-    private String description; // 產品描述
-    private double price; // 產品價格
+public class Home {
+    private String name;
+    private String description;
+    private double price;
 
-    // Getter 和 Setter 方法
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+    // getter 和 setter 方法
     public String getName() {
         return name;
     }

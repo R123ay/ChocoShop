@@ -20,7 +20,7 @@ public class OrderController {
     @PostMapping
     public String createOrder(@ModelAttribute Order order) {
         orderService.saveOrder(order);
-        return "redirect:/orders";
+        return "orders";
     }
 
     @GetMapping

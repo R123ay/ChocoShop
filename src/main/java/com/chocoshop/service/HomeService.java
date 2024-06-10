@@ -11,7 +11,7 @@ import com.chocoshop.model.po.Product;
 
 
 @Service
-public class ProductService {
+public class HomeService {
     @Autowired
     private HomeDto productDto;
 
