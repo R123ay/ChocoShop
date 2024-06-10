@@ -1,7 +1,6 @@
 package com.chocoshop.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,6 @@ import com.chocoshop.service.ProductService;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-
     @Autowired
     private ProductService productService;
 
@@ -21,34 +19,24 @@ public class ProductController {
     public String getAllProducts(Model model) {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
-        return "product"; // 連結到 product.jsp
+        return "product"; // 這裡應該是您的product.jsp的檔名
     }
 
     @PostMapping("/add")
-    public String addProduct(@RequestParam String name, @RequestParam String description, @RequestParam double price) {
-        Product product = new Product();
-        product.setName(name);
-        product.setDescription(description);
-        product.setPrice(price);
+    public String addProduct(@ModelAttribute Product product) {
         productService.saveProduct(product);
-        return "redirect:/products"; // 添加後重定向到產品列表頁面
+        return "redirect:/products";
+    }
+
+    @PostMapping("/update")
+    public String updateProduct(@ModelAttribute Product product) {
+        productService.updateProduct(product);
+        return "redirect:/products";
     }
 
     @PostMapping("/delete")
     public String deleteProduct(@RequestParam Integer id) {
         productService.deleteProduct(id);
-        return "redirect:/products"; // 刪除後重定向到產品列表頁面
-    }
-
-    @PostMapping("/update")
-    public String updateProduct(@RequestParam Integer id, @RequestParam String name, @RequestParam String description, @RequestParam double price) {
-        Product product = productService.getProductById(id);
-        if (product != null) {
-            product.setName(name);
-            product.setDescription(description);
-            product.setPrice(price);
-            productService.saveProduct(product);
-        }
-        return "redirect:/products"; // 更新後重定向到產品列表頁面
+        return "redirect:/products";
     }
 }

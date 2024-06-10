@@ -9,9 +9,8 @@ import com.chocoshop.model.po.Product;
 
 @Repository
 public class ProductDtoImpl implements ProductDto {
-
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    JdbcTemplate jdbcTemplate;
 
     @Override
     public List<Product> findAll() {
