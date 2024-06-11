@@ -14,10 +14,11 @@ import com.chocoshop.model.po.Customer;
 
 @Repository
 public class CustomerDtoImpl implements CustomerDto {
-
+    
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    JdbcTemplate jdbcTemplate;
 
+    // RowMapper for Customer
     private static final class CustomerRowMapper implements RowMapper<Customer> {
         @Override
         public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -26,8 +27,6 @@ public class CustomerDtoImpl implements CustomerDto {
             customer.setName(rs.getString("name"));
             customer.setEmail(rs.getString("email"));
             customer.setPhone(rs.getString("phone"));
-            customer.setAddress(rs.getString("address"));
-            customer.setCreatedAt(rs.getTimestamp("created_at"));
             return customer;
         }
     }
@@ -46,8 +45,8 @@ public class CustomerDtoImpl implements CustomerDto {
 
     @Override
     public Integer add(Customer customer) {
-        String sql = "INSERT INTO customers (name, email, phone, address, created_at) VALUES (?, ?, ?, ?, ?)";
-        return jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getPhone(), customer.getAddress(), customer.getCreatedAt());
+        String sql = "INSERT INTO customers (name, email, phone) VALUES (?, ?, ?)";
+        return jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getPhone());
     }
 
     @Override
@@ -58,7 +57,7 @@ public class CustomerDtoImpl implements CustomerDto {
 
     @Override
     public Integer update(Customer customer) {
-        String sql = "UPDATE customers SET name = ?, email = ?, phone = ?, address = ? WHERE id = ?";
-        return jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getPhone(), customer.getAddress(), customer.getId());
+        String sql = "UPDATE customers SET name = ?, email = ?, phone = ? WHERE id = ?";
+        return jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getPhone(), customer.getId());
     }
 }

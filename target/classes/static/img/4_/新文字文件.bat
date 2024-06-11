@@ -1,0 +1,2 @@
+
+rename *.webp *.png
