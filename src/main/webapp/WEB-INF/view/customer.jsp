@@ -1,21 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>  
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer List</title>
+    <title>Customer Management</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customerstyle.css">
 </head>
 <body>
-    <h1>Customer List</h1>
+    <h1>Customer Management</h1>
     <table>
         <thead>
             <tr>
-                <th>Customer ID</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Phone</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,42 +27,28 @@
                     <td>${customer.id}</td>
                     <td>${customer.name}</td>
                     <td>${customer.email}</td>
-                    <td>${customer.phone}</td>
                     <td>
-                        <form method="post" action="${pageContext.request.contextPath}/api/customers/delete">
-                            <input type="hidden" name="id" value="${customer.id}">
+                        <!-- Use a single form for actions, and separate them by button names or JavaScript -->
+                        <form method="post" action="${pageContext.request.contextPath}/customers/delete/${customer.id}">
+                            <!-- Added delete endpoint and used POST for delete operation -->
                             <button type="submit">Delete</button>
                         </form>
-                        <form method="get" action="${pageContext.request.contextPath}/api/customers/update">
-                            <input type="hidden" name="id" value="${customer.id}">
-                            <button type="submit">Update</button>
+                        <form method="get" action="${pageContext.request.contextPath}/customers/edit/${customer.id}">
+                            <!-- Ensure correct URL for the edit functionality -->
+                            <button type="submit">Edit</button>
                         </form>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-    <form method="post" action="${pageContext.request.contextPath}/api/customers/add">
+    <form method="post" action="${pageContext.request.contextPath}/customers/add">
         <h2>Add Customer</h2>
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone" required>
+        <input type="email" id="email" name="email">
         <button type="submit">Add Customer</button>
-    </form>
-    <form method="post" action="${pageContext.request.contextPath}/api/customers/update">
-        <h2>Update Customer</h2>
-        <label for="id">Customer ID:</label>
-        <input type="text" id="id" name="id" required>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone" required>
-        <button type="submit">Update Customer</button>
     </form>
 </body>
 </html>

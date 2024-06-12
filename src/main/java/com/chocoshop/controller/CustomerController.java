@@ -28,36 +28,30 @@ public class CustomerController {
     public String getCustomerById(@PathVariable Integer id, Model model) {
         Customer customer = customerService.getCustomerById(id);
         model.addAttribute("customer", customer);
-        return "customer-detail"; // Ensure you have customer-detail.jsp for this view
+        return "customer-detail";
     }
 
-    @GetMapping("/new")
-    public String createCustomerForm(Model model) {
-        model.addAttribute("customer", new Customer());
-        return "customer-form";
-    }
-
-    @PostMapping
-    public String createCustomer(@ModelAttribute Customer customer) {
-        customerService.saveCustomer(customer);
-        return "redirect:/customers";
-    }
-
-    @GetMapping("/{id}/edit")
-    public String editCustomerForm(@PathVariable Integer id, Model model) {
+    // 新增的 editCustomer 方法
+    @GetMapping("/edit/{id}")
+    public String editCustomer(@PathVariable Integer id, Model model) {
         Customer customer = customerService.getCustomerById(id);
         model.addAttribute("customer", customer);
-        return "customer-form";
+        return "edit-customer";
     }
 
-    @PostMapping("/{id}")
-    public String updateCustomer(@PathVariable Integer id, @ModelAttribute Customer customer) {
-        customer.setId(id);
+    @PostMapping("/add")
+    public String addCustomer(@ModelAttribute Customer customer) {
         customerService.saveCustomer(customer);
         return "redirect:/customers";
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/edit")
+    public String editCustomer(@ModelAttribute Customer customer) {
+        customerService.updateCustomer(customer);
+        return "redirect:/customers";
+    }
+
+    @PostMapping("/delete/{id}")
     public String deleteCustomer(@PathVariable Integer id) {
         customerService.deleteCustomer(id);
         return "redirect:/customers";

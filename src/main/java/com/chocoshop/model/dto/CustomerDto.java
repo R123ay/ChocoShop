@@ -9,18 +9,24 @@ import com.chocoshop.model.po.Customer;
 @Repository
 public interface CustomerDto {
     
-    // Retrieve all customers
+    // 取得所有客戶信息
     public List<Customer> findAll();
 
-    // Retrieve a customer by ID
+    // 根據ID取得特定客戶信息
     public Customer findById(Integer id);
 
-    // Save a new customer
+    // 新增客戶
     public Integer add(Customer customer);
 
-    // Delete a customer by ID
+    // 刪除客戶
     public Integer deleteById(Integer id);
 
-    // Update a customer
+    // 編輯客戶信息
+    public Integer edit(Customer customer);
+    
     public Integer update(Customer customer);
+
+	void save(Customer customer);
+
+	void delete(Integer id);
 }

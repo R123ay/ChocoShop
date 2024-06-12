@@ -14,28 +14,24 @@ public class CustomerService {
     @Autowired
     private CustomerDto customerDto;
 
-    // Retrieve all customers
     public List<Customer> getAllCustomers() {
         return customerDto.findAll();
     }
 
-    // Retrieve a customer by ID
     public Customer getCustomerById(Integer id) {
         return customerDto.findById(id);
     }
 
-    // Add a new customer
-    public Integer saveCustomer(Customer customer) {
-        return customerDto.add(customer);
+    public void saveCustomer(Customer customer) {
+        customerDto.save(customer);
     }
 
-    // Update an existing customer
-    public Integer updateCustomer(Customer customer) {
-        return customerDto.update(customer);
+    // 更新客戶信息
+    public void updateCustomer(Customer customer) {
+        customerDto.update(customer);
     }
 
-    // Delete a customer by ID
-    public Integer deleteCustomer(Integer id) {
-        return customerDto.deleteById(id);
+    public void deleteCustomer(Integer id) {
+        customerDto.delete(id);
     }
 }

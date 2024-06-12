@@ -1,28 +1,24 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
 }
 
 h1 {
-    text-align: center;
-    margin-top: 20px;
+    color: #333;
 }
 
 table {
-    width: 80%;
-    margin: 20px auto;
+    width: 100%;
     border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
 table, th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
 }
 
 th, td {
-    padding: 8px;
-    text-align: center;
+    padding: 10px;
+    text-align: left;
 }
 
 th {
@@ -30,34 +26,24 @@ th {
 }
 
 form {
-    width: 50%;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-form h2 {
-    text-align: center;
+    margin: 20px 0;
 }
 
 label {
     display: block;
-    margin-top: 10px;
+    margin: 5px 0;
 }
 
 input[type="text"],
-input[type="email"],
-button {
+input[type="email"] {
     width: 100%;
     padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
+    margin: 5px 0 10px 0;
+    box-sizing: border-box;
 }
 
 button {
+    padding: 10px 15px;
     background-color: #4CAF50;
     color: white;
     border: none;
