@@ -1,0 +1,1 @@
+SELECT * FROM chocoshop.order_items;

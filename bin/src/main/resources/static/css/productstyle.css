@@ -1,0 +1,55 @@
+/* productstyle.css */
+
+/* 設置表格的基本樣式 */
+table {
+    width: 100%;
+    border-collapse: collapse; /* 移除邊框間的間隙 */
+}
+
+th, td {
+    border: 1px solid #ddd; /* 邊框顏色 */
+    padding: 8px; /* 單元格內邊距 */
+    text-align: left; /* 文字左對齊 */
+}
+
+th {
+    background-color: #f2f2f2; /* 表頭背景顏色 */
+    color: black; /* 表頭文字顏色 */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* 偶數行背景顏色 */
+}
+
+tr:hover {
+    background-color: #ddd; /* 滑鼠懸停行背景顏色 */
+}
+
+/* 設置表單的基本樣式 */
+form {
+    margin-top: 20px; /* 表單與上方元素的間距 */
+}
+
+label {
+    display: inline-block; /* 使標籤成為行內塊元素 */
+    width: 100px; /* 標籤寬度 */
+    margin-bottom: 10px; /* 標籤與下方元素的間距 */
+}
+
+input {
+    padding: 5px; /* 輸入框內邊距 */
+    margin-bottom: 10px; /* 輸入框與下方元素的間距 */
+    width: calc(100% - 120px); /* 輸入框寬度 */
+}
+
+button {
+    padding: 10px 20px; /* 按鈕內邊距 */
+    background-color: #4CAF50; /* 按鈕背景顏色 */
+    color: white; /* 按鈕文字顏色 */
+    border: none; /* 按鈕無邊框 */
+    cursor: pointer; /* 滑鼠變為手型 */
+}
+
+button:hover {
+    background-color: #45a049; /* 滑鼠懸停按鈕背景顏色 */
+}
