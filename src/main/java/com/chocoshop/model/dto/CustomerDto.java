@@ -3,30 +3,26 @@ package com.chocoshop.model.dto;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-
 import com.chocoshop.model.po.Customer;
 
 @Repository
 public interface CustomerDto {
     
-    // 取得所有客戶信息
-    public List<Customer> findAll();
-
-    // 根據ID取得特定客戶信息
-    public Customer findById(Integer id);
-
-    // 新增客戶
-    public Integer add(Customer customer);
-
-    // 刪除客戶
-    public Integer deleteById(Integer id);
-
-    // 編輯客戶信息
-    public Integer edit(Customer customer);
+    // Retrieve all customers
+    List<Customer> findAll(); // To get all customers
     
-    public Integer update(Customer customer);
-
-	void save(Customer customer);
-
-	void delete(Integer id);
+    // Retrieve a customer by their ID
+    Customer findById(Integer id); // To get a customer by their ID
+    
+    // Add a new customer
+    Integer add(Customer customer); // To add a new customer
+    
+    // Delete a customer by their ID
+    Integer deleteById(Integer id); // To delete a customer by their ID
+    
+    // Update customer information
+    Integer update(Customer customer); // To update customer information
+    
+    // Edit customer information
+    Customer edit(Integer id, Customer customer); // To edit customer information
 }

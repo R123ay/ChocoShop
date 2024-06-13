@@ -31,23 +31,22 @@ public class CustomerController {
         return "customer-detail";
     }
 
-    // 新增的 editCustomer 方法
+    @PostMapping("/add")
+    public String addCustomer(@ModelAttribute Customer customer) {
+        customerService.addCustomer(customer);
+        return "redirect:/customers";
+    }
+
     @GetMapping("/edit/{id}")
     public String editCustomer(@PathVariable Integer id, Model model) {
         Customer customer = customerService.getCustomerById(id);
         model.addAttribute("customer", customer);
-        return "edit-customer";
-    }
-
-    @PostMapping("/add")
-    public String addCustomer(@ModelAttribute Customer customer) {
-        customerService.saveCustomer(customer);
-        return "redirect:/customers";
+        return "customer-edit";
     }
 
     @PostMapping("/edit")
     public String editCustomer(@ModelAttribute Customer customer) {
-        customerService.updateCustomer(customer);
+        customerService.editCustomer(customer.getId(), customer);
         return "redirect:/customers";
     }
 

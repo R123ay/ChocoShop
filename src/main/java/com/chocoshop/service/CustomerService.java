@@ -22,16 +22,16 @@ public class CustomerService {
         return customerDto.findById(id);
     }
 
-    public void saveCustomer(Customer customer) {
-        customerDto.save(customer);
+    public Integer addCustomer(Customer customer) {
+        return customerDto.add(customer);
     }
 
-    // 更新客戶信息
-    public void updateCustomer(Customer customer) {
-        customerDto.update(customer);
+    // Revised edit function to match the DTO
+    public Customer editCustomer(Integer id, Customer customer) {
+        return customerDto.edit(id, customer);
     }
-
-    public void deleteCustomer(Integer id) {
-        customerDto.delete(id);
+    
+    public Integer deleteCustomer(Integer id) {
+        return customerDto.deleteById(id);
     }
 }
