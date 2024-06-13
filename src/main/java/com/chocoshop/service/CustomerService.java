@@ -30,7 +30,7 @@ public class CustomerService {
     public Customer editCustomer(Integer id, Customer customer) {
         return customerDto.edit(id, customer);
     }
-    
+
     public Integer deleteCustomer(Integer id) {
         return customerDto.deleteById(id);
     }

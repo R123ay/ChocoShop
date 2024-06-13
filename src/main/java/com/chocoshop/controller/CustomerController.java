@@ -37,16 +37,9 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editCustomer(@PathVariable Integer id, Model model) {
-        Customer customer = customerService.getCustomerById(id);
-        model.addAttribute("customer", customer);
-        return "customer-edit";
-    }
-
-    @PostMapping("/edit")
-    public String editCustomer(@ModelAttribute Customer customer) {
-        customerService.editCustomer(customer.getId(), customer);
+    @PostMapping("/edit/{id}")
+    public String editCustomer(@PathVariable Integer id, @ModelAttribute Customer customer) {
+        customerService.editCustomer(id, customer);
         return "redirect:/customers";
     }
 
