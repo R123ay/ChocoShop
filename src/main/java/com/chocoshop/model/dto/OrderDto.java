@@ -12,4 +12,6 @@ public interface OrderDto {
     Order findById(Integer id); // 根據ID找到訂單
     Integer add(Order order); // 新增訂單
     Integer deleteById(Integer id); // 根據ID刪除訂單
+    Integer update(Order order);// 更新訂單
+	void deleteOrderItemsByOrderId(Integer id);
 }

@@ -45,4 +45,10 @@ public class CustomerDtoImpl implements CustomerDto {
         jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getPhone(), id);
         return findById(id);
     }
+
+	@Override
+	public Integer update(Customer customer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

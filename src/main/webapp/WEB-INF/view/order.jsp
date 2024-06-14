@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>  
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +30,7 @@
                     <td>${order.totalPrice}</td>
                     <td>${order.status}</td>
                     <td>
-                        <form method="post" action="${pageContext.request.contextPath}/orders/delete">
-                            <input type="hidden" name="id" value="${order.id}">
+                        <form method="post" action="${pageContext.request.contextPath}/orders/delete/${order.id}">
                             <button type="submit">Delete</button>
                         </form>
                     </td>
@@ -39,7 +38,7 @@
             </c:forEach>
         </tbody>
     </table>
-    <form method="post" action="${pageContext.request.contextPath}/orders">
+    <form method="post" action="${pageContext.request.contextPath}/orders/add">
         <h2>Add Order</h2>
         <label for="customerId">Customer ID:</label>
         <input type="number" id="customerId" name="customerId" required>

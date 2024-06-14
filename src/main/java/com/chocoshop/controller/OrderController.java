@@ -17,12 +17,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
     
-    @PostMapping
-    public String createOrder(@ModelAttribute Order order) {
-        orderService.saveOrder(order);
-        return "orders";
-    }
-
     @GetMapping
     public String getAllOrders(Model model) {
         List<Order> orders = orderService.getAllOrders();
@@ -34,11 +28,17 @@ public class OrderController {
     public String getOrderById(@PathVariable Integer id, Model model) {
         Order order = orderService.getOrderById(id);
         model.addAttribute("order", order);
-        return "orderDetail"; // Assuming you have an orderDetail.jsp to display single order details
+        return "order-detail";
     }
 
-    @PostMapping("/delete")
-    public String deleteOrder(@RequestParam Integer id) {
+    @PostMapping("/add")
+    public String addOrder(@ModelAttribute Order order) {
+        orderService.saveOrder(order);
+        return "redirect:/orders";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteOrder(@PathVariable Integer id) {
         orderService.deleteOrder(id);
         return "redirect:/orders";
     }

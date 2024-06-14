@@ -10,7 +10,6 @@ import com.chocoshop.model.po.Order;
 
 @Service
 public class OrderService {
-	
     @Autowired
     private OrderDto orderDto;
 
@@ -27,6 +26,9 @@ public class OrderService {
     }
 
     public Integer deleteOrder(Integer id) {
+        // 首先刪除與該訂單相關的 order_items
+        orderDto.deleteOrderItemsByOrderId(id);
+        // 然後刪除訂單
         return orderDto.deleteById(id);
     }
 }

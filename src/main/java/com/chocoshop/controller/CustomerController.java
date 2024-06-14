@@ -34,13 +34,13 @@ public class CustomerController {
     @PostMapping("/add")
     public String addCustomer(@ModelAttribute Customer customer) {
         customerService.addCustomer(customer);
-        return "redirect:/customers";
+        return "redirect:/customers";  // Redirects back to the customers page after adding a customer
     }
 
-    @PostMapping("/edit/{id}")
-    public String editCustomer(@PathVariable Integer id, @ModelAttribute Customer customer) {
-        customerService.editCustomer(id, customer);
-        return "redirect:/customers";
+    @PostMapping("/edit")
+    public String editCustomer(@ModelAttribute Customer customer) {
+        customerService.editCustomer(customer.getId(), customer);
+        return "redirect:/customers";  // Redirects back to the customers page after editing a customer
     }
 
     @PostMapping("/delete/{id}")
