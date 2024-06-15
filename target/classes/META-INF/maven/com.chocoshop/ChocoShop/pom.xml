@@ -68,13 +68,6 @@
         <version>5.8.1</version>
         <scope>test</scope>
     </dependency>
-    <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-engine</artifactId>
-        <version>5.8.1</version>
-        <scope>test</scope>
-    </dependency>
-    
     <!-- 添加 Spring Boot 測試依賴 -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -85,7 +78,6 @@
     	<groupId>org.springframework.boot</groupId>
     	<artifactId>spring-boot-starter-security</artifactId>
 	</dependency>
-
 	</dependencies>
 
 	<build>
