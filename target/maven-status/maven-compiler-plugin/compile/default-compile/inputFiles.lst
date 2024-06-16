@@ -12,14 +12,10 @@ D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\dto\OrderDto.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\dto\OrderDtoImpl.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\dto\ProductDto.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\dto\ProductDtoImpl.java
-D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\dto\UserDto.java
-D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\dto\UserDtoImpl.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\po\Customer.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\po\Order.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\po\OrderItem.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\po\Product.java
-D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\po\User.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\service\CustomerService.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\service\OrderService.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\service\ProductService.java
-D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\service\UserService.java

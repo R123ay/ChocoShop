@@ -13,10 +13,10 @@ import com.chocoshop.service.CustomerService;
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
-    
+
     @Autowired
     private CustomerService customerService;
-    
+
     @GetMapping
     public String getAllCustomers(Model model) {
         List<Customer> customers = customerService.getAllCustomers();
@@ -34,13 +34,13 @@ public class CustomerController {
     @PostMapping("/add")
     public String addCustomer(@ModelAttribute Customer customer) {
         customerService.addCustomer(customer);
-        return "redirect:/customers";  // Redirects back to the customers page after adding a customer
+        return "redirect:/customers";
     }
 
     @PostMapping("/edit")
     public String editCustomer(@ModelAttribute Customer customer) {
         customerService.editCustomer(customer.getId(), customer);
-        return "redirect:/customers";  // Redirects back to the customers page after editing a customer
+        return "redirect:/customers";
     }
 
     @PostMapping("/delete/{id}")

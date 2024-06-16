@@ -8,6 +8,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login() {
-        return "login"; // login.jsp should be present in src/main/webapp/WEB-INF/jsp/
+        return "login";
     }
 }
