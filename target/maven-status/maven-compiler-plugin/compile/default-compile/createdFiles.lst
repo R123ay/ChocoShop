@@ -1,4 +1,5 @@
 com\chocoshop\model\dto\OrderDto.class
+security\KeyUtil.class
 com\chocoshop\controller\OrderController.class
 com\chocoshop\model\dto\ProductDto.class
 com\chocoshop\controller\CustomerController.class
@@ -14,7 +15,6 @@ com\chocoshop\controller\LoginController.class
 com\chocoshop\controller\AdminController.class
 com\chocoshop\model\dto\OrderDtoImpl.class
 com\chocoshop\model\po\Order.class
-com\chocoshop\config\SecurityConfig.class
 com\chocoshop\model\po\Product.class
 com\chocoshop\ChocoShopApplication.class
 com\chocoshop\service\OrderService.class

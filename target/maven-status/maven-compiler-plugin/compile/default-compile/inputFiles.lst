@@ -1,5 +1,4 @@
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\ChocoShopApplication.java
-D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\config\SecurityConfig.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\controller\AdminController.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\controller\CustomerController.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\controller\IndexController.java
@@ -19,3 +18,4 @@ D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\model\po\Product.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\service\CustomerService.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\service\OrderService.java
 D:\Java Workspace\ChocoShop\src\main\java\com\chocoshop\service\ProductService.java
+D:\Java Workspace\ChocoShop\src\main\java\security\KeyUtil.java
