@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order List</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderstyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/order.css">
 </head>
 <body>
     <h1>Order List</h1>

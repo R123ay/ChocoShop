@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Product List</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productstyle.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product.css">
 </head>
 <body>
     <h1>Product List</h1>
