@@ -18,18 +18,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/admin/**").hasRole("ADMIN")
+        http.csrf().disable()
+            .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/login", "/error").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
-        )
-        .formLogin((form) -> form
+            )
+            .formLogin((form) -> form
                 .loginPage("/login")
                 .defaultSuccessUrl("/admin", true)
                 .failureUrl("/login?error=true")
                 .permitAll()
-        )
-        .logout((logout) -> logout
+            )
+            .logout((logout) -> logout
                 .logoutSuccessUrl("/login?logout=true")
                 .permitAll());
         return http.build();
