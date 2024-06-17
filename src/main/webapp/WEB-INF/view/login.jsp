@@ -1,62 +1,70 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <!DOCTYPE html>
-    <html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>產品管理</title>
+    <link rel="stylesheet" type="text/css" href="product.css"> <!-- 連結到CSS檔案 -->
+</head>
+<body>
+    <h1>產品管理</h1> <!-- 標題 -->
+    <form action="/products" method="post">
+        <!-- 新增產品表單 -->
+        <label for="name">品名:</label>
+        <input type="text" id="name" name="name" required><br><br>
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Login</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
-        <!-- 假設你有一個 styles.css 來處理樣式 -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
+        <label for="category">類別:</label>
+        <input type="text" id="category" name="category" required><br><br>
 
-    <body>
-        <!--導航nav============================================= -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-custom-dark fixed-top">
-            <div class="container-xl">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
-                    aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarMenu">
-                    <ul class="navbar-nav ms-auto mb-2 mb-md-0 ps-5 ps-md-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#sec1">首頁</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#sec2">商品訂購</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#sec3">購物車</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#sec4">聯絡我們</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <label for="price">價格:</label>
+        <input type="number" id="price" name="price" required><br><br>
 
-        <div class="container mt-5 pt-5">
-            <h2>Login</h2>
-            <form action="${pageContext.request.contextPath}/login" method="post">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username:</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password:</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-                <c:if test="${param.error != null}">
-                    <p class="text-danger">Invalid username or password.</p>
-                </c:if>
-            </form>
-        </div>
+        <label for="imageUrl">商品照片URL:</label>
+        <input type="text" id="imageUrl" name="imageUrl"><br><br>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    </body>
+        <button type="submit">新增產品</button> <!-- 新增產品按鈕 -->
+    </form>
 
-    </html>
+    <hr>
+
+    <h2>現有產品</h2> <!-- 現有產品列表標題 -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>品名</th>
+                <th>類別</th>
+                <th>價格</th>
+                <th>商品照片</th>
+                <th>上架時間</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 從後端傳來的產品列表 -->
+            <c:forEach var="product" items="${products}">
+                <tr>
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${product.category}</td>
+                    <td>${product.price}</td>
+                    <td><img src="${product.imageUrl}" alt="${product.name}" width="100"></td> <!-- 顯示產品照片 -->
+                    <td>${product.createdAt}</td>
+                    <td>
+                        <!-- 編輯產品表單 -->
+                        <form action="/products/${product.id}" method="post" style="display:inline;">
+                            <input type="hidden" name="_method" value="put">
+                            <button type="submit">編輯</button>
+                        </form>
+                        <!-- 刪除產品表單 -->
+                        <form action="/products/delete/${product.id}" method="post" style="display:inline;">
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="submit">刪除</button>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</body>
+</html>

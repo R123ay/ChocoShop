@@ -1,44 +1,40 @@
 package com.chocoshop.model.dto;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import com.chocoshop.model.po.Product;
+
+import java.util.List;
 
 @Repository
-public class ProductDtoImpl implements ProductDto {
+public class ProductDtoImpl {
+
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
-    @Override
-    public List<Product> findAll() {
+    public List<ProductDto> getAllProducts() {
         String sql = "SELECT * FROM products";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProductDto.class));
     }
 
-    @Override
-    public Product findById(Integer id) {
+    public ProductDto getProductById(int id) {
         String sql = "SELECT * FROM products WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(Product.class));
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(ProductDto.class), id);
     }
 
-    @Override
-    public Integer add(Product product) {
-        String sql = "INSERT INTO products (name, description, price) VALUES (?, ?, ?)";
-        return jdbcTemplate.update(sql, product.getName(), product.getDescription(), product.getPrice());
+    public void addProduct(ProductDto product) {
+        String sql = "INSERT INTO products (name, category, price, image_url, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getCreatedAt(), product.getUpdatedAt());
     }
 
-    @Override
-    public Integer update(Product product) {
-        String sql = "UPDATE products SET name = ?, description = ?, price = ? WHERE id = ?";
-        return jdbcTemplate.update(sql, product.getName(), product.getDescription(), product.getPrice(), product.getId());
+    public void updateProduct(ProductDto product) {
+        String sql = "UPDATE products SET name = ?, category = ?, price = ?, image_url = ?, updated_at = ? WHERE id = ?";
+        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getUpdatedAt(), product.getId());
     }
 
-    @Override
-    public Integer deleteById(Integer id) {
+    public void deleteProduct(int id) {
         String sql = "DELETE FROM products WHERE id = ?";
-        return jdbcTemplate.update(sql, id);
+        jdbcTemplate.update(sql, id);
     }
 }

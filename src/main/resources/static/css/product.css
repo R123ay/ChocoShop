@@ -1,55 +1,98 @@
-/* productstyle.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
 
-/* 設置表格的基本樣式 */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+form .form-group {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+form input, form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
 table {
     width: 100%;
-    border-collapse: collapse; /* 移除邊框間的間隙 */
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
 }
 
 th, td {
-    border: 1px solid #ddd; /* 邊框顏色 */
-    padding: 8px; /* 單元格內邊距 */
-    text-align: left; /* 文字左對齊 */
+    padding: 10px;
+    text-align: left;
 }
 
 th {
-    background-color: #f2f2f2; /* 表頭背景顏色 */
-    color: black; /* 表頭文字顏色 */
+    background-color: #f2f2f2;
 }
 
-tr:nth-child(even) {
-    background-color: #f9f9f9; /* 偶數行背景顏色 */
+button, .btn {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
 }
 
-tr:hover {
-    background-color: #ddd; /* 滑鼠懸停行背景顏色 */
+button:hover, .btn:hover {
+    background-color: #45a049;
 }
 
-/* 設置表單的基本樣式 */
-form {
-    margin-top: 20px; /* 表單與上方元素的間距 */
+.btn-danger {
+    background-color: #f44336;
 }
 
-label {
-    display: inline-block; /* 使標籤成為行內塊元素 */
-    width: 100px; /* 標籤寬度 */
-    margin-bottom: 10px; /* 標籤與下方元素的間距 */
+.btn-danger:hover {
+    background-color: #e53935;
 }
 
-input {
-    padding: 5px; /* 輸入框內邊距 */
-    margin-bottom: 10px; /* 輸入框與下方元素的間距 */
-    width: calc(100% - 120px); /* 輸入框寬度 */
+.btn-primary {
+    background-color: #007bff;
 }
 
-button {
-    padding: 10px 20px; /* 按鈕內邊距 */
-    background-color: #4CAF50; /* 按鈕背景顏色 */
-    color: white; /* 按鈕文字顏色 */
-    border: none; /* 按鈕無邊框 */
-    cursor: pointer; /* 滑鼠變為手型 */
-}
-
-button:hover {
-    background-color: #45a049; /* 滑鼠懸停按鈕背景顏色 */
+.btn-primary:hover {
+    background-color: #0056b3;
 }

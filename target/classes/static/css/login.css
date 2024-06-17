@@ -14,7 +14,6 @@ CSS 3.0 之後
 新版的設計 box-sizing 是 border-box,  代表 padding、border 會往寬度的內部內縮範圍
 新版的設計：讓計算更方便、讓RWD響應式設計更容易*/
 
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Righteous&display=swap');
 
 * {
@@ -28,56 +27,60 @@ body {
   font-family: Arial, Helvetica, sans-serif;/* 設計整頁文字的預設字體 (sans-serif 是系統預設的無襯線字體) */
 }
 
-.login-container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+/* 設定頁面字體和基本樣式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
 }
 
-h2 {
-    text-align: center;
+h1, h2 {
+    color: #333;
+}
+
+form {
     margin-bottom: 20px;
 }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
 label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    display: inline-block;
+    width: 100px;
 }
 
 input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+input[type="number"] {
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 10px;
 }
 
 button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
     color: white;
-    font-size: 16px;
+    border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #45a049;
 }
 
-.error-message {
-    color: red;
-    text-align: center;
-    margin-top: 10px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+img {
+    max-width: 100px;
+    height: auto;
 }

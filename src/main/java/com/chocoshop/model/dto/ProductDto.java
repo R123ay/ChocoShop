@@ -1,26 +1,70 @@
 package com.chocoshop.model.dto;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-import com.chocoshop.model.po.Product;
+import java.time.LocalDateTime;
 
-@Repository
-public interface ProductDto {
-    // 取得所有產品
-    List<Product> findAll();
-    
-    // 根據ID取得產品
-    Product findById(Integer id);
-    
-    // 添加新產品
-    Integer add(Product product);
-    
-    // 更新產品資料
-    Integer update(Product product);
-    
-    // 根據ID刪除產品
-    Integer deleteById(Integer id);
+public class ProductDto {
+    private int id;
+    private String name;
+    private String category;
+    private int price;
+    private String imageUrl;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt; // 新增 updatedAt 屬性
+
+    // Getters and Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
