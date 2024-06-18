@@ -16,5 +16,6 @@ public class Product {
     private int price;
     private String imageUrl;
     private LocalDateTime createdAt;
-    private String description; // 新增description屬性
+    private LocalDateTime updatedAt;
+    private String description; // 新增 description 屬性
 }

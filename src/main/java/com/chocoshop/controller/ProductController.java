@@ -1,14 +1,16 @@
 package com.chocoshop.controller;
 
 import com.chocoshop.model.dto.ProductDto;
-import com.chocoshop.model.dto.ProductDtoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,20 +25,37 @@ public class ProductController {
     private static String UPLOADED_FOLDER = "E:/GitHub/ChocoShop/src/main/resources/static/upload/";
 
     @Autowired
-    private ProductDtoImpl productDtoImpl;
-
-    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @GetMapping
     public String getAllProducts(Model model) {
-        List<ProductDto> products = productDtoImpl.getAllProducts();
+        String sql = "SELECT * FROM products";
+        List<ProductDto> products = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProductDto.class));
+        model.addAttribute("products", products);
+        return "product";
+    }
+
+    @GetMapping("/{id}")
+    public String getProductById(@PathVariable int id, Model model) {
+        String sql = "SELECT * FROM products WHERE id = ?";
+        ProductDto product = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(ProductDto.class), id);
+        model.addAttribute("product", product);
+        return "productDetail";
+    }
+
+    @GetMapping("/search")
+    public String searchProducts(@RequestParam("keyword") String keyword, Model model) {
+        String sql = "SELECT * FROM products WHERE name LIKE ? OR category LIKE ?";
+        List<ProductDto> products = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProductDto.class), "%" + keyword + "%", "%" + keyword + "%");
         model.addAttribute("products", products);
         return "product";
     }
 
     @PostMapping("/add")
-    public String addProduct(@ModelAttribute ProductDto product, @RequestParam("file") MultipartFile file) {
+    public String addProduct(@Valid @ModelAttribute ProductDto product, BindingResult result, @RequestParam("file") MultipartFile file) {
+        if (result.hasErrors()) {
+            return "product";
+        }
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
@@ -49,16 +68,16 @@ public class ProductController {
         }
         product.setCreatedAt(LocalDateTime.now());
         product.setUpdatedAt(LocalDateTime.now());
-        productDtoImpl.addProduct(product);
+        String sql = "INSERT INTO products (name, category, price, image_url, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getCreatedAt(), product.getUpdatedAt());
         return "redirect:/products";
     }
 
-    @PostMapping("/update/{id}")
-    public String updateProduct(@PathVariable int id, @ModelAttribute ProductDto product, @RequestParam(value = "file", required = false) MultipartFile file) {
-        if (product.getName() == null || product.getName().isEmpty()) {
+    @PostMapping("/update")
+    public String updateProduct(@Valid @ModelAttribute ProductDto product, BindingResult result, @RequestParam(value = "file", required = false) MultipartFile file) {
+        if (result.hasErrors()) {
             return "redirect:/products?error=Product name cannot be null or empty";
         }
-        System.out.println(file.getOriginalFilename());
         if (file != null && !file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
@@ -69,12 +88,13 @@ public class ProductController {
                 e.printStackTrace();
             }
         } else {
-            ProductDto existingProduct = productDtoImpl.getProductById(id);
-            product.setImageUrl(existingProduct.getImageUrl());
+            String sql = "SELECT image_url FROM products WHERE id = ?";
+            String imageUrl = jdbcTemplate.queryForObject(sql, new Object[]{product.getId()}, String.class);
+            product.setImageUrl(imageUrl);
         }
-        product.setId(id);
         product.setUpdatedAt(LocalDateTime.now());
-        productDtoImpl.updateProduct(product);
+        String sql = "UPDATE products SET name = ?, category = ?, price = ?, image_url = ?, updated_at = ? WHERE id = ?";
+        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getUpdatedAt(), product.getId());
         return "redirect:/products";
     }
 
@@ -82,7 +102,8 @@ public class ProductController {
     public String deleteProduct(@PathVariable int id) {
         String sql = "DELETE FROM order_items WHERE product_id = ?";
         jdbcTemplate.update(sql, id);
-        productDtoImpl.deleteProduct(id);
+        sql = "DELETE FROM products WHERE id = ?";
+        jdbcTemplate.update(sql, id);
         return "redirect:/products";
     }
 }

@@ -1,15 +1,24 @@
 package com.chocoshop.model.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 public class ProductDto {
     private int id;
+
+    @NotBlank(message = "商品名稱不能為空")
     private String name;
+
+    @NotBlank(message = "類別不能為空")
     private String category;
+
+    @Min(value = 0, message = "價格不能為負")
     private int price;
+
     private String imageUrl;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt; // 新增 updatedAt 屬性
+    private LocalDateTime updatedAt;
 
     // Getters and Setters
     public int getId() {

@@ -26,6 +26,13 @@
 <body>
     <div class="container">
         <h1 class="mt-4">產品管理</h1>
+        
+        <!-- 商品搜索框 -->
+        <form action="${pageContext.request.contextPath}/products/search" method="get" class="mb-4">
+            <input type="text" name="keyword" placeholder="Search by name or category">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        
         <button type="button" class="btn btn-success float-right mb-4" data-toggle="modal" data-target="#addProductModal">新增商品</button>
         
         <table class="table">
@@ -45,26 +52,18 @@
                 <c:forEach var="product" items="${products}">
                     <tr>
                         <td>${product.id}</td>
-                        <td><input type="text" name="name" value="${product.name}" class="form-control" onchange="changeProductName(this)" readonly></td>
-                        <td><input type="text" name="category" value="${product.category}" class="form-control" readonly></td>
-                        <td><input type="number" name="price" value="${product.price}" class="form-control" readonly></td>
+                        <td><a href="${pageContext.request.contextPath}/products/${product.id}">${product.name}</a></td>
+                        <td>${product.category}</td>
+                        <td>${product.price}</td>
                         <td>
-                            <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" width="100" height="100" onclick="showImageModal('${pageContext.request.contextPath}${product.imageUrl}')">
-                            <form action="${pageContext.request.contextPath}/products/update/${product.id}" method="post" enctype="multipart/form-data" class="hidden-form">
-                                <input type="file" name="file" style="display: none;" onchange="changeProductImage(${product.id}, this)">
-                            </form>
+                            <a href="${pageContext.request.contextPath}/products/${product.id}">
+                                <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" width="100" height="100">
+                            </a>
                         </td>
                         <td>${product.createdAt}</td>
                         <td>${product.updatedAt}</td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-custom" onclick="enableEditing(this)">編輯</button>
-                            <form id="editForm" action="${pageContext.request.contextPath}/products/update/${product.id}" method="post" enctype="multipart/form-data" class="hidden-form">
-                                <input type="hidden" name="name" value="${product.name}" class="form-control" readonly>
-                                <input type="hidden" name="category" value="${product.category}" class="form-control" readonly>
-                                <input type="hidden" name="price" value="${product.price}" class="form-control" readonly>
-                                <input type="file" name="file" id="${product.id}">
-                                <button type="submit" class="btn btn-success btn-custom" style="display: none;">保存</button>
-                            </form>
+                            <button type="button" class="btn btn-primary btn-custom" onclick="showEditModal(${product.id}, '${product.name}', '${product.category}', ${product.price}, '${product.imageUrl}')">編輯</button>
                             <a href="${pageContext.request.contextPath}/products/delete/${product.id}" class="btn btn-danger btn-custom" style="display:inline;">刪除</a>
                         </td>
                     </tr>
@@ -108,6 +107,45 @@
         </div>
     </div>
 
+    <!-- 編輯商品的模態框 -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel">編輯商品</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProductForm" action="${pageContext.request.contextPath}/products/update" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="edit-id">ID</label>
+                            <input type="text" class="form-control" id="edit-id" name="id" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-name">品名</label>
+                            <input type="text" class="form-control" id="edit-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-category">類別</label>
+                            <input type="text" class="form-control" id="edit-category" name="category" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-price">價格</label>
+                            <input type="number" class="form-control" id="edit-price" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-imageUrl">商品照片</label>
+                            <input type="file" class="form-control" id="edit-imageUrl" name="file">
+                        </div>
+                        <button type="submit" class="btn btn-success">保存</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 照片預覽模態框 -->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -129,13 +167,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-        function enableEditing(button) {
-            var row = button.closest('tr');
-            var inputs = row.querySelectorAll('input');
-            inputs.forEach(input => input.removeAttribute('readonly'));
-            row.querySelector('input[type="file"]').style.display = 'block';
-            button.style.display = 'none';
-            row.querySelector('.btn-success').style.display = 'inline-block';
+        function showEditModal(id, name, category, price, imageUrl) {
+            $('#edit-id').val(id);
+            $('#edit-name').val(name);
+            $('#edit-category').val(category);
+            $('#edit-price').val(price);
+            $('#editProductModal').modal('show');
         }
 
         function showImageModal(imageUrl) {
@@ -143,22 +180,6 @@
             var image = modal.find('#previewImage');
             image.attr('src', imageUrl);
             modal.modal('show');
-        }
-        
-        function changeProductName(e) {        	
-        	$('#editForm input[name="name"]').val($(e).val());
-        	console.log($('#editForm input[name="name"]').val());
-        }
-        
-        function changeProductImage(id, e) {
-        	console.log(e.files);
-            // Extract the file name
-            let fileName = e.files.length > 0 ? e.files[0].name : '';
-            
-            // Set the value of the input field to the file name
-            $('#editForm input[name="file"]').val(fileName);
-
-        	$('#editForm input[name="file"]').val(e.files);
         }
     </script>
 </body>
