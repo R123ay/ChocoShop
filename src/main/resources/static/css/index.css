@@ -23,14 +23,14 @@ CSS 3.0 之後
 }
 
 body {
-  background-color: #F4F1ED;/* 設計整頁的背景顏色 */
+  background-color: #1c0a01;/* 設計整頁的背景顏色 */
   color: #ffa140;/* 設計整頁文字的預設顏色 */
   font-family: Arial, Helvetica, sans-serif;/* 設計整頁文字的預設字體 (sans-serif 是系統預設的無襯線字體) */
 }
 
 /* 頁首header==================== */
 header {
-  background-color: #1c0a01;/* 背景色 */
+
   /* padding: 20px; *//* 內邊距 */
   text-align: center;/* 文字居中 */
 }
@@ -125,7 +125,7 @@ header img {
 /* 5/30開始更改 */
 /* sec區域==================== */
 section {
-  background-color: #1c0a01;
+
   /* 背景色 */
   padding: 20px;
   /* 內邊距 */
@@ -142,7 +142,7 @@ section {
 }
 
 footer {
-  background-color: #623E2A;
+
   /* 背景色 */
   padding: 20px;
   /* 內邊距 */
