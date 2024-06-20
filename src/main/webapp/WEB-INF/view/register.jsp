@@ -7,26 +7,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>註冊</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
     <style>
-        .register-container {
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8f9fa;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             height: 100vh;
+			padding-top: 20px; /* 確保上方有空白距離 */
         }
-        .register-form {
-            width: 100%;
-            max-width: 500px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+        .register-container {
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        .register-title {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .form-label {
+            font-weight: 500;
         }
         .form-text {
             color: red;
             display: none;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 0.75rem;
+            font-weight: 600;
+        }
+        .link-container {
+            margin-top: 1rem;
+            text-align: center;
         }
     </style>
     <script>
@@ -81,9 +103,9 @@
     </script>
 </head>
 <body>
-    <div class="container register-container" onload="redirectToLogin()">
+    <div class="container register-container">
         <div class="register-form">
-            <h1 class="mb-4 text-center">註冊</h1>
+            <h1 class="register-title">註冊</h1>
             <c:if test="${not empty success}">
                 <div class="alert alert-success">${success}</div>
                 <script>
@@ -117,8 +139,13 @@
                     <label for="birthday" class="form-label">生日</label>
                     <input type="date" class="form-control" id="birthday" name="birthday" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">註冊</button>
-                <a href="${pageContext.request.contextPath}/login" class="btn btn-link mt-3 w-100 text-center">已經有帳號？立即登入</a>
+                <c:if test="${not empty error}">
+                    <div class="alert alert-danger">${error}</div>
+                </c:if>
+                <button type="submit" class="btn btn-primary">註冊</button>
+                <div class="link-container">
+                    <a href="${pageContext.request.contextPath}/login" class="btn btn-link">已經有帳號？立即登入</a>
+                </div>
             </form>
         </div>
     </div>

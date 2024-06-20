@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    private static String UPLOADED_FOLDER = "E:/GitHub/ChocoShop/src/main/resources/static/upload/";
+	private static String UPLOADED_FOLDER = "E:/GitHub/ChocoShop/src/main/resources/static/upload/";;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
