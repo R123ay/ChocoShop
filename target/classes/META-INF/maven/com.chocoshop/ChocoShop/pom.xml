@@ -106,6 +106,12 @@
 	        <groupId>org.springframework</groupId>
 	        <artifactId>spring-jdbc</artifactId>
 	    </dependency>
+	    <dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.4.6</version>
+		</dependency>
+
         <!-- 依賴結束 #修改 -->
     </dependencies>
 
