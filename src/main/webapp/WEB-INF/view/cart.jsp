@@ -73,7 +73,9 @@
                 </tbody>
             </table>
             <div class="d-flex justify-content-end">
-                <a href="${pageContext.request.contextPath}/checkout" class="btn btn-success">結帳</a>
+                <form action="${pageContext.request.contextPath}/orders/checkout" method="post">
+                    <button type="submit" class="btn btn-success">結帳</button>
+                </form>
             </div>
         </c:if>
     </div>

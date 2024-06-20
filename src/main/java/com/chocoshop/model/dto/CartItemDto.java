@@ -8,4 +8,7 @@ public class CartItemDto {
     private String name;
     private double price;
     private int quantity;
+	public Object getProductId() {
+		return id;
+	}
 }

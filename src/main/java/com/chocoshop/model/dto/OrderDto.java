@@ -14,4 +14,5 @@ public interface OrderDto {
     Integer deleteById(Integer id); // 根據ID刪除訂單
     Integer update(Order order);// 更新訂單
 	void deleteOrderItemsByOrderId(Integer id);
+	void setOrderItems(List<OrderItemDto> orderItems);
 }

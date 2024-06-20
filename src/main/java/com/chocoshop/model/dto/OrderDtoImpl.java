@@ -51,4 +51,10 @@ public class OrderDtoImpl implements OrderDto {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void setOrderItems(List<OrderItemDto> orderItems) {
+		// TODO Auto-generated method stub
+		
+	}
 }
