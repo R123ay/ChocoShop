@@ -19,7 +19,7 @@
                 <li><a href="<c:url value='/orders' />">購物車</a></li>
             </ul>
         </nav>
-        <h1 class="band-name band-name-large">The Generics</h1>
+        <h1 class="band-name band-name-large">購物車系統</h1>
     </header>
     <section class="container content-section">
         <h2 class="section-header">商品列表</h2>

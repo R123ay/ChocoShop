@@ -12,4 +12,6 @@ public class OrderItemDto {
     private String productName;
     private double price;
     private int quantity;
+    private double totalPrice;
+    private int customerId; // 用於 cart_items 表
 }

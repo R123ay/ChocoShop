@@ -75,4 +75,30 @@ public class OrderController {
         model.addAttribute("products", products);
         return "cart"; // 返回 cart.jsp 視圖
     }
+
+    @PostMapping("/addItem")
+    @ResponseBody
+    public String addItemToCart(@RequestBody OrderItemDto orderItem) {
+        String sql = "INSERT INTO cart_items (customer_id, product_id, quantity, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())";
+        jdbcTemplate.update(sql, orderItem.getCustomerId(), orderItem.getProductId(), orderItem.getQuantity());
+        return "{\"success\": true}";
+    }
+
+    @GetMapping("/cartItems")
+    @ResponseBody
+    public List<OrderItemDto> getCartItems(@RequestParam("customerId") int customerId) {
+        String sql = "SELECT ci.cart_item_id AS orderItemId, ci.product_id AS productId, p.name AS productName, p.price, ci.quantity, p.image_url AS imageUrl " +
+                     "FROM cart_items ci " +
+                     "JOIN products p ON ci.product_id = p.product_id " +
+                     "WHERE ci.customer_id = ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderItemDto.class), customerId);
+    }
+
+    @PostMapping("/removeItem")
+    @ResponseBody
+    public String removeCartItem(@RequestBody OrderItemDto orderItem) {
+        String sql = "DELETE FROM cart_items WHERE customer_id = ? AND product_id = ?";
+        jdbcTemplate.update(sql, orderItem.getCustomerId(), orderItem.getProductId());
+        return "{\"success\": true}";
+    }
 }
