@@ -18,9 +18,9 @@ public class ProductDtoImpl {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProductDto.class));
     }
 
-    public ProductDto getProductById(int id) {
-        String sql = "SELECT * FROM products WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(ProductDto.class), id);
+    public ProductDto getProductById(int productId) {
+        String sql = "SELECT * FROM products WHERE product_id = ?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(ProductDto.class), productId);
     }
 
     public void addProduct(ProductDto product) {
@@ -29,12 +29,12 @@ public class ProductDtoImpl {
     }
 
     public void updateProduct(ProductDto product) {
-        String sql = "UPDATE products SET name = ?, category = ?, price = ?, image_url = ?, updated_at = ? WHERE id = ?";
-        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getUpdatedAt(), product.getId());
+        String sql = "UPDATE products SET name = ?, category = ?, price = ?, image_url = ?, updated_at = ? WHERE product_id = ?";
+        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getUpdatedAt(), product.getProductId());
     }
 
-    public void deleteProduct(int id) {
-        String sql = "DELETE FROM products WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+    public void deleteProduct(int productId) {
+        String sql = "DELETE FROM products WHERE product_id = ?";
+        jdbcTemplate.update(sql, productId);
     }
 }

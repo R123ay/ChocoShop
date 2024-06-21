@@ -43,7 +43,7 @@ public class LoginController {
                 if ("ADMIN".equals(user.getRole())) {
                     return "redirect:/admin";
                 } else if ("CUSTOMER".equals(user.getRole())) {
-                    return "redirect:/cart";
+                    return "redirect:/orders/cart";
                 } else {
                     model.addAttribute("error", "未知的用戶角色");
                     return "login";

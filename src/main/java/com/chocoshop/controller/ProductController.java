@@ -1,3 +1,4 @@
+
 package com.chocoshop.controller;
 
 import com.chocoshop.model.dto.ProductDto;
@@ -22,7 +23,7 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-	private static String UPLOADED_FOLDER = "E:/GitHub/ChocoShop/src/main/resources/static/upload/";;
+    private static String UPLOADED_FOLDER = "E:/GitHub/ChocoShop/src/main/resources/static/upload/";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -35,10 +36,10 @@ public class ProductController {
         return "product";
     }
 
-    @GetMapping("/{id}")
-    public String getProductById(@PathVariable int id, Model model) {
-        String sql = "SELECT * FROM products WHERE id = ?";
-        ProductDto product = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(ProductDto.class), id);
+    @GetMapping("/{productId}")
+    public String getProductById(@PathVariable int productId, Model model) {
+        String sql = "SELECT * FROM products WHERE product_id = ?";
+        ProductDto product = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(ProductDto.class), productId);
         model.addAttribute("product", product);
         return "productDetail";
     }
@@ -84,26 +85,27 @@ public class ProductController {
                 Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
                 Files.write(path, bytes);
                 product.setImageUrl("/static/upload/" + file.getOriginalFilename());
-            } catch (IOException e) {
+                Thread.sleep(500);;
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            String sql = "SELECT image_url FROM products WHERE id = ?";
-            String imageUrl = jdbcTemplate.queryForObject(sql, new Object[]{product.getId()}, String.class);
+            String sql = "SELECT image_url FROM products WHERE product_id = ?";
+            String imageUrl = jdbcTemplate.queryForObject(sql, new Object[]{product.getProductId()}, String.class);
             product.setImageUrl(imageUrl);
         }
         product.setUpdatedAt(LocalDateTime.now());
-        String sql = "UPDATE products SET name = ?, category = ?, price = ?, image_url = ?, updated_at = ? WHERE id = ?";
-        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getUpdatedAt(), product.getId());
+        String sql = "UPDATE products SET name = ?, category = ?, price = ?, image_url = ?, updated_at = ? WHERE product_id = ?";
+        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getUpdatedAt(), product.getProductId());
         return "redirect:/products";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable int id) {
+    @GetMapping("/delete/{productId}")
+    public String deleteProduct(@PathVariable int productId) {
         String sql = "DELETE FROM order_items WHERE product_id = ?";
-        jdbcTemplate.update(sql, id);
-        sql = "DELETE FROM products WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        jdbcTemplate.update(sql, productId);
+        sql = "DELETE FROM products WHERE product_id = ?";
+        jdbcTemplate.update(sql, productId);
         return "redirect:/products";
     }
 }

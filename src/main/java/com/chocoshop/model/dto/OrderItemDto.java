@@ -1,13 +1,15 @@
 package com.chocoshop.model.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class OrderItemDto {
-    private int id;
+    private int orderItemId;
     private int orderId;
     private int productId;
     private String productName;
-    private int quantity;
     private double price;
-
-    // Getters and Setters
-    //...
+    private int quantity;
 }

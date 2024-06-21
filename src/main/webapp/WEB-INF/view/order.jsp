@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -24,12 +25,12 @@
             <tbody>
                 <c:forEach var="order" items="${orders}">
                     <tr>
-                        <td>${order.id}</td>
+                        <td>${order.orderId}</td> <!-- 修改這裡以匹配 OrderDto 中的 orderId -->
                         <td>${order.totalPrice}</td>
                         <td>${order.createdAt}</td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/orders/${order.id}" class="btn btn-primary">詳細</a>
-                            <a href="${pageContext.request.contextPath}/orders/delete/${order.id}" class="btn btn-danger">刪除</a>
+                            <a href="${pageContext.request.contextPath}/orders/${order.orderId}" class="btn btn-primary">詳細</a> <!-- 修改這裡以匹配 OrderDto 中的 orderId -->
+                            <a href="${pageContext.request.contextPath}/orders/delete/${order.orderId}" class="btn btn-danger">刪除</a> <!-- 修改這裡以匹配 OrderDto 中的 orderId -->
                         </td>
                     </tr>
                 </c:forEach>
