@@ -1,0 +1,165 @@
+/*設計【CSS規則】的順序參考建議：
+(層次) 由外而內 → (同一層中) 由上而下 → (同一橫列) 由左而右
+
+設計【CSS屬性】的順序參考建議：
+背景(顏色、圖片) → 大小(寬、高) → 邊距(margin、padding) → 內容(文字、插圖) → 特殊定位*/
+
+/*這個規則建議放在最上方
+
+由於有些標籤元素預設是有 margin 外部邊距, 造成設計接縫不一
+建議：使用 * 星號代表所有的標籤元素, 將 margin 邊距先設定為 0
+
+傳統的設計 box-sizing 是 content-box, 代表 padding、border 會往外擴增範圍
+CSS 3.0 之後
+新版的設計 box-sizing 是 border-box,  代表 padding、border 會往寬度的內部內縮範圍
+新版的設計：讓計算更方便、讓RWD響應式設計更容易*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Righteous&display=swap');
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1c0a01;/* 設計整頁的背景顏色 */
+  color: #ffa140;/* 設計整頁文字的預設顏色 */
+  font-family: Arial, Helvetica, sans-serif;/* 設計整頁文字的預設字體 (sans-serif 是系統預設的無襯線字體) */
+}
+
+/* 頁首header==================== */
+header {
+
+  /* padding: 20px; *//* 內邊距 */
+  text-align: center;/* 文字居中 */
+}
+
+header img {
+  max-width: 230px;/* 設置圖片最大寬度 */
+  height: auto;/* 高度自動調整 */
+}
+
+/* 頁首header_nav==================== */
+/* .navbar {
+  padding: 80px 20px 20px;
+} */
+
+.navbar-brand img {
+  width: min(calc(500px + 3vw), 800px);
+  height: auto;
+}
+
+.navbar-nav .nav-item .nav-link {
+  color: #ffa140;/* 設置文字顏色 */
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  color: #ffa140;/* 設置文字顏色 */
+  font-weight: bold;
+  text-decoration: underline;/* 滑鼠懸浮時加底線 */
+}
+
+.navbar-nav .nav-item .nav-link:focus {
+  color: #F0D397; /* 按鈕被選中時顏色 */
+  font-weight: bold;
+  outline: none; /* 移除按鈕被選中時的外框 */
+}
+
+@media (min-width: 768px) {/* 這是一個媒體查詢，應用於寬度至少為 768 像素的設備 */
+
+  @keyframes headerAni {
+
+    /* 定義一個名為 headerAni 的關鍵幀動畫 */
+    0% {
+      transform: translateY(-400%);
+      /* 在動畫的 0% 位置（開始時），將元素在 Y 軸上向上移動 400% */
+    }
+
+    100% {
+      transform: translateY(0);
+      /* 在動畫的 100% 位置（結束時），將元素移動回 Y 軸原位 */
+    }
+  }
+
+  .bg-custom-dark {
+    --bs-bg-opacity: 1;
+    background-color: rgb(28, 10, 1);
+  }
+
+  .navbar {
+    position: absolute;
+    z-index: 9;
+    top: 15;
+    left: 0;
+    right: 0;
+    /* 將 .navbar 元素設置為絕對定位，z-index 設置為 9，並固定在視窗的頂部（上下左右邊距為 0） */
+  }
+
+
+  .navbar.fixed {
+    position: fixed;
+    animation-name: headerAni;
+    animation-duration: .75s;
+    /* 當 .navbar 元素具有 .fixed 類時，將其設置為固定定位，並應用 headerAni 動畫，持續時間為 0.75 秒 */
+  }
+
+  .navbar-toggler {
+    position: relative;
+    /* 确保 position 已设置 */
+    z-index: 1000;
+    /* 設置摺疊按鈕的 z-index 為 1000，使其在其他元素之上 */
+  }
+
+  .navbar-brand {
+    position: relative;
+    /* 确保 position 已设置 */
+    z-index: 999;
+    /* 設置 logo 的 z-index 為 999，使其在摺疊按鈕下面 */
+  }
+}
+
+/* 5/30開始更改 */
+/* sec區域==================== */
+section {
+
+  /* 背景色 */
+  padding: 20px;
+  /* 內邊距 */
+  text-align: center;
+  /* 文字居中 */
+}
+
+.nav-link {
+  display: block;
+  padding: .5rem 1rem;
+  /* color: #ffa140; */
+  text-decoration: none;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+footer {
+
+  /* 背景色 */
+  padding: 20px;
+  /* 內邊距 */
+  text-align: left;
+  /* 文字居中 */
+  font-size: 50%;
+}
+
+@media(min-width: 768px) {
+  #sec4 .container-xl {
+    /* background-image: url(./img/sec4bg.png), url(./img/sec4bg2.png); */
+    background-repeat: no-repeat, repeat-y;
+    /* background-position: center top; */
+    background-size: 100% auto;
+    padding-top: 0;
+    min-height: 600px;
+  }
+
+
+}

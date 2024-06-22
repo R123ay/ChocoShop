@@ -9,21 +9,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>購物車</title>
     <link rel="stylesheet" href="<c:url value='/static/css/cart.css' />">
-    <script src="<c:url value='/static/js/cart.js' />" async></script>
+    <script src="<c:url value='/static/cartjs.js' />" async></script> <!-- 更新這行 -->
 </head>
 <body>
     <header class="main-header">
         <nav class="main-nav nav">
             <ul>
                 <li><a href="<c:url value='/' />">官網</a></li>
-                <li><a href="<c:url value='/orders' />">購物車</a></li>
+                <li><a href="<c:url value='/cart' />">購物車</a></li>
             </ul>
         </nav>
         <h1 class="band-name band-name-large">購物車系統</h1>
     </header>
     <section class="container content-section">
         <h2 class="section-header">商品列表</h2>
-        <div class="shop-items">
+        <div class="shop-items" id="shop-items">
             <c:forEach var="product" items="${products}">
                 <div class="shop-item">
                     <span class="shop-item-title">${product.name}</span>
