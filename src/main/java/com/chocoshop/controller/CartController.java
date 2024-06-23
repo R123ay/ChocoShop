@@ -25,41 +25,37 @@ public class CartController {
         String sql = "SELECT * FROM products";
         List<ProductDto> products = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProductDto.class));
         model.addAttribute("products", products);
-        return "cart";  // 返回購物車頁面
-    }
 
-    @GetMapping("/list")
-    @ResponseBody
-    public List<ProductDto> getProducts() {
-        String sql = "SELECT * FROM products";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProductDto.class));
+        sql = "SELECT * FROM cart_items WHERE customer_id = 1";  // 假設顧客ID為1
+        List<CartItemDto> cartItems = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItemDto.class));
+        model.addAttribute("cartItems", cartItems);
+
+        double totalAmount = cartItems.stream().mapToDouble(CartItemDto::getTotalPrice).sum();
+        model.addAttribute("totalAmount", totalAmount);
+
+        return "cart";
     }
 
     @PostMapping("/add")
-    @ResponseBody
-    public String addToCart(@RequestBody CartItemDto cartItem) {
-        cartItem.setTotalPrice(cartItem.getPrice() * cartItem.getQuantity());
-        
+    public String addToCart(@RequestParam int customerId, @RequestParam int productId, @RequestParam double price, @RequestParam int quantity) {
         // 添加日誌
-        System.out.println("Add to cart: " + cartItem);
+        System.out.println("Add to cart - customerId: " + customerId + ", productId: " + productId + ", price: " + price + ", quantity: " + quantity);
 
-        String sql = "INSERT INTO cart_items (customer_id, product_id, price, quantity, total_price) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, cartItem.getCustomerId(), cartItem.getProductId(), cartItem.getPrice(), cartItem.getQuantity(), cartItem.getTotalPrice());
-        return "{\"success\": true}";
+        String sql = "INSERT INTO cart_items (customer_id, product_id, price, quantity) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, customerId, productId, price, quantity);
+        return "redirect:/cart?customerId=" + customerId;
     }
 
+
     @PostMapping("/remove")
-    @ResponseBody
-    public String removeFromCart(@RequestBody CartItemDto cartItem) {
+    public String removeFromCart(@RequestParam int customerId, @RequestParam int productId) {
         String sql = "DELETE FROM cart_items WHERE customer_id = ? AND product_id = ?";
-        jdbcTemplate.update(sql, cartItem.getCustomerId(), cartItem.getProductId());
-        return "{\"success\": true}";
+        jdbcTemplate.update(sql, customerId, productId);
+        return "redirect:/cart?customerId=" + customerId;
     }
 
     @PostMapping("/checkout")
-    @ResponseBody
-    public String checkout(@RequestBody Map<String, Integer> request) {
-        int customerId = request.get("customerId");
+    public String checkout(@RequestParam int customerId) {
         double totalAmount = 0;
 
         String sql = "SELECT * FROM cart_items WHERE customer_id = ?";
@@ -82,6 +78,6 @@ public class CartController {
         sql = "DELETE FROM cart_items WHERE customer_id = ?";
         jdbcTemplate.update(sql, customerId);
 
-        return "{\"success\": true}";
+        return "redirect:/cart?customerId=" + customerId;
     }
 }

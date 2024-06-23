@@ -16,35 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `cart_items`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `cart_items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `birthday` date NOT NULL,
-  `role` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `cart_items` (
+  `cart_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `quantity` int NOT NULL,
+  `total_price` decimal(10,2) GENERATED ALWAYS AS ((`price` * `quantity`)) STORED,
+  PRIMARY KEY (`cart_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `cart_items`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','admin123','Admin User','admin@example.com','1234567890','1980-01-01','ADMIN'),(2,'john_doe','password123','John Doe','john@example.com','0987654321','1990-05-15','CUSTOMER'),(3,'jane_smith','jane2021','Jane Smith','jane@example.com','0123456789','1992-08-25','CUSTOMER'),(4,'456789','456789123','123456','123@123','1234567894','2024-06-20','CUSTOMER'),(7,'789','abcdefg','789','789@789','7894561230','2024-06-20','CUSTOMER'),(10,'456','456789123','456','456@456','4567891230','2024-06-20','CUSTOMER');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `cart_items` WRITE;
+/*!40000 ALTER TABLE `cart_items` DISABLE KEYS */;
+INSERT INTO `cart_items` (`cart_id`, `customer_id`, `product_id`, `price`, `quantity`) VALUES (1,1,101,10.00,2),(2,1,102,15.50,1);
+/*!40000 ALTER TABLE `cart_items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-23 11:27:51
+-- Dump completed on 2024-06-23 11:27:52

@@ -14,4 +14,16 @@ public class CartItemDto {
     private double price;
     private int quantity;
     private double totalPrice;
+    
+    @Override
+    public String toString() {
+        return "CartItemDto{" +
+                "cartId=" + cartId +
+                ", customerId=" + customerId +
+                ", productId=" + productId +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }
