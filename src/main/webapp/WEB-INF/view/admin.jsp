@@ -38,10 +38,10 @@
             margin-right: 10px; /* 文字和圖片之間的間距 */
         }
         .admin-title {
-            font-size: 24px; /* 修改這裡來改變標題的大小 */
-            font-weight: 700;
-            text-align: center;
-            flex: 1; /* 增加這一行，使標題在可用空間內置中 */
+	        font-size: 24px; /* 修改這裡來改變標題的大小 */
+	        font-weight: 700;
+	        text-align: center;
+	        flex: 1; /* 增加這一行，使標題在可用空間內置中 */
         }
         .navbar {
             display: flex;
@@ -78,37 +78,6 @@
         .content {
             margin-top: 1.5rem;
         }
-
-        /* 新增的樣式 */
-        .navbar-toggler {
-            display: none;
-            background-color: #ffa140;
-            border: none;
-            color: #1c0a01;
-            font-size: 18px;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-        }
-        .navbar-collapse {
-            display: flex;
-        }
-        @media (max-width: 768px) {
-            .navbar-collapse {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-            }
-            .navbar-toggler {
-                display: block;
-            }
-            .navbar .nav-link {
-                color: #1c0a01;
-                background-color: #ffa140;
-                margin: 0.5rem 0;
-                padding: 0.5rem 1rem;
-                border-radius: 5px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -117,9 +86,8 @@
             <img src="${pageContext.request.contextPath}/static/img/logo2.png" alt="品牌圖示">
             <div class="admin-title">商家後台管理系統</div>
         </div>
-        <button class="navbar-toggler" onclick="toggleNavbar()">選單</button>
-        <nav class="navbar navbar-collapse">
-            <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
+        <nav class="navbar">
+            <a class="nav-link" href="<c:url value='/products' />">商品上架</a>
             <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
             <a class="nav-link" href="<c:url value='/' />">首頁官網</a>
             <a class="nav-link" href="<c:url value='/cart' />">顧客端-購物車</a>
@@ -130,15 +98,5 @@
             <!-- 其他管理內容可以在這裡顯示 -->
         </div>
     </div>
-    <script>
-        function toggleNavbar() {
-            var navbar = document.querySelector('.navbar-collapse');
-            if (navbar.style.display === 'flex') {
-                navbar.style.display = 'none';
-            } else {
-                navbar.style.display = 'flex';
-            }
-        }
-    </script>
 </body>
 </html>

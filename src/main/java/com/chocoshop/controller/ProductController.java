@@ -30,7 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.chocoshop.model.dto.ProductDto;
 
 @Controller
-@RequestMapping("/admin/products")
+@RequestMapping("/products")
 public class ProductController {
 
     private static final String UPLOADED_FOLDER = "D:/Java Workspace/ChocoShop/src/main/resources/static/upload/";
