@@ -1,0 +1,110 @@
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    display: flex;
+    height: 100vh;
+}
+
+.admin-container {
+    display: flex;
+    width: 100%;
+}
+
+.admin-sidebar {
+    background-color: #343a40;
+    padding: 2rem;
+    width: 250px;
+    color: white;
+    flex-shrink: 0;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #495057;
+}
+
+.admin-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 2rem;
+    flex-grow: 1;
+}
+
+.admin-sidebar ul li {
+    margin: 20px 0;
+}
+
+.admin-sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.admin-sidebar ul li a:hover {
+    background-color: #495057;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 2rem;
+    margin-left: 250px; /* Same as the width of the sidebar */
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px;
+    overflow-y: auto;
+}
+
+.admin-title {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.section-header {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-table th, .admin-table td {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    text-align: left;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.btn-info {
+    background-color: #007bff;
+}
+
+.btn-info:hover {
+    background-color: #0056b3;
+}

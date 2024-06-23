@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>購物車</title>
     <link rel="stylesheet" href="<c:url value='/static/css/cart.css' />">
-    <script src="<c:url value='/static/cartjs.js' />" async></script>
+    <!-- <script src="<c:url value='/static/cartjs.js' />" async></script> --> <!-- 註解掉這行 -->
     <link rel="shortcut icon" href="#" />
 </head>
 <body>
@@ -25,23 +25,21 @@
     <section class="container content-section">
         <h2 class="section-header">商品列表</h2>
         <div class="shop-items" id="shop-items">
-			<c:forEach var="product" items="${products}">
-			    <div class="shop-item">
-			        <span class="shop-item-title">${product.name}</span>
-			        <img class="shop-item-image" src="${product.imageUrl}">
-			        <div class="shop-item-details">
-			            <span class="shop-item-price">$${product.price}</span>
-			            <form action="<c:url value='/cart/add' />" method="post">
-			                <input type="hidden" name="customerId" value="1">
-			                <input type="hidden" name="productId" value="${product.productId}">
-			                <input type="hidden" name="price" value="${product.price}">
-			                <input class="shop-item-quantity" type="number" name="quantity" value="1" min="1">
-			                <button class="btn btn-primary" type="submit">加入購物車</button>
-			            </form>
-			        </div>
-			    </div>
-			</c:forEach>
-
+            <c:forEach var="product" items="${products}">
+                <div class="shop-item">
+                    <span class="shop-item-title">${product.name}</span>
+                    <img class="shop-item-image" src="${product.imageUrl}">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">$${product.price}</span>
+                        <form action="<c:url value='/cart/add' />" method="post">
+                            <input type="hidden" name="productId" value="${product.productId}">
+                            <input type="hidden" name="price" value="${product.price}">
+                            <input class="shop-item-quantity" type="number" name="quantity" value="1" min="1">
+                            <button class="btn btn-primary" type="submit">加入購物車</button>
+                        </form>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </section>
     <section class="container content-section">
@@ -61,7 +59,6 @@
                     <div class="cart-quantity cart-column">
                         <span class="cart-quantity">${cartItem.quantity}</span>
                         <form action="<c:url value='/cart/remove' />" method="post" style="display:inline;">
-                            <input type="hidden" name="customerId" value="${cartItem.customerId}">
                             <input type="hidden" name="productId" value="${cartItem.productId}">
                             <button class="btn btn-danger" type="submit">移除</button>
                         </form>
@@ -74,8 +71,7 @@
             <span class="cart-total-price">$<c:out value="${totalAmount}" /></span>
         </div>
         <form action="<c:url value='/cart/checkout' />" method="post">
-            <input type="hidden" name="customerId" value="1">
-            <button class="btn btn-primary btn-purchase" type="submit">購買</button>
+            <button class="btn btn-primary btn-purchase" type="submit">結帳</button>
         </form>
     </section>
 </body>

@@ -1,7 +1,9 @@
 package com.chocoshop.controller;
 
-import java.util.List;
-import java.util.Map;
+import com.chocoshop.model.dto.CartItemDto;
+import com.chocoshop.model.dto.ProductDto;
+
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -10,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.chocoshop.model.dto.CartItemDto;
-import com.chocoshop.model.dto.ProductDto;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/cart")
@@ -26,7 +28,7 @@ public class CartController {
         List<ProductDto> products = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProductDto.class));
         model.addAttribute("products", products);
 
-        sql = "SELECT * FROM cart_items WHERE customer_id = 1";  // 假設顧客ID為1
+        sql = "SELECT * FROM cart_items";
         List<CartItemDto> cartItems = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItemDto.class));
         model.addAttribute("cartItems", cartItems);
 
@@ -37,47 +39,78 @@ public class CartController {
     }
 
     @PostMapping("/add")
-    public String addToCart(@RequestParam int customerId, @RequestParam int productId, @RequestParam double price, @RequestParam int quantity) {
-        // 添加日誌
-        System.out.println("Add to cart - customerId: " + customerId + ", productId: " + productId + ", price: " + price + ", quantity: " + quantity);
+    public String addToCart(@RequestParam int productId, @RequestParam double price, @RequestParam int quantity) {
+        System.out.println("Add to cart - productId: " + productId + ", price: " + price + ", quantity: " + quantity);
 
-        String sql = "INSERT INTO cart_items (customer_id, product_id, price, quantity) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, customerId, productId, price, quantity);
-        return "redirect:/cart?customerId=" + customerId;
+        String sql = "INSERT INTO cart_items (product_id, price, quantity, total_price) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, productId, price, quantity, price * quantity);
+        return "redirect:/cart";
     }
 
-
     @PostMapping("/remove")
-    public String removeFromCart(@RequestParam int customerId, @RequestParam int productId) {
-        String sql = "DELETE FROM cart_items WHERE customer_id = ? AND product_id = ?";
-        jdbcTemplate.update(sql, customerId, productId);
-        return "redirect:/cart?customerId=" + customerId;
+    public String removeFromCart(@RequestParam int productId) {
+        String sql = "DELETE FROM cart_items WHERE product_id = ?";
+        jdbcTemplate.update(sql, productId);
+        return "redirect:/cart";
     }
 
     @PostMapping("/checkout")
-    public String checkout(@RequestParam int customerId) {
-        double totalAmount = 0;
+    public String checkout(Model model) {
+        String sql = "SELECT * FROM cart_items";
+        List<CartItemDto> cartItems = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItemDto.class));
+        model.addAttribute("cartItems", cartItems);
 
-        String sql = "SELECT * FROM cart_items WHERE customer_id = ?";
-        List<CartItemDto> cartItems = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItemDto.class), customerId);
+        double totalAmount = cartItems.stream().mapToDouble(CartItemDto::getTotalPrice).sum();
+        model.addAttribute("totalAmount", totalAmount);
 
-        sql = "INSERT INTO orders (customer_id, total_price) VALUES (?, ?)";
-        jdbcTemplate.update(sql, customerId, totalAmount);
-
-        int orderId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-
-        for (CartItemDto item : cartItems) {
-            totalAmount += item.getTotalPrice();
-            sql = "INSERT INTO order_items (order_id, product_id, quantity, total_price) VALUES (?, ?, ?, ?)";
-            jdbcTemplate.update(sql, orderId, item.getProductId(), item.getQuantity(), item.getTotalPrice());
-        }
-
-        sql = "UPDATE orders SET total_price = ? WHERE order_id = ?";
-        jdbcTemplate.update(sql, totalAmount, orderId);
-
-        sql = "DELETE FROM cart_items WHERE customer_id = ?";
-        jdbcTemplate.update(sql, customerId);
-
-        return "redirect:/cart?customerId=" + customerId;
+        return "confirmPurchase";
     }
+
+    @PostMapping("/confirm")
+    public String confirmPurchase(
+            @RequestParam String name,
+            @RequestParam String phone,
+            @RequestParam String email,
+            @RequestParam String paymentMethod,
+            @RequestParam String deliveryDate,
+            Model model) {
+
+        LocalDateTime purchaseDateTime = LocalDateTime.now();
+
+        List<CartItemDto> cartItems = jdbcTemplate.query("SELECT * FROM cart_items", new BeanPropertyRowMapper<>(CartItemDto.class));
+
+        double totalAmount = cartItems.stream().mapToDouble(CartItemDto::getTotalPrice).sum();
+
+        model.addAttribute("name", name);
+        model.addAttribute("phone", phone);
+        model.addAttribute("email", email);
+        model.addAttribute("paymentMethod", paymentMethod);
+        model.addAttribute("deliveryDate", deliveryDate);
+        model.addAttribute("purchaseDateTime", purchaseDateTime);
+        model.addAttribute("cartItems", cartItems);
+        model.addAttribute("totalAmount", totalAmount);
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(10000);
+
+                String sql = "INSERT INTO orders (name, phone, email, payment_method, delivery_date, purchase_date, total_price) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                jdbcTemplate.update(sql, name, phone, email, paymentMethod, deliveryDate, purchaseDateTime, totalAmount);
+
+                int orderId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+
+                for (CartItemDto item : cartItems) {
+                    sql = "INSERT INTO order_items (order_id, product_id, quantity, total_price) VALUES (?, ?, ?, ?)";
+                    jdbcTemplate.update(sql, orderId, item.getProductId(), item.getQuantity(), item.getTotalPrice());
+                }
+
+                jdbcTemplate.update("DELETE FROM cart_items");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        return "thankyou";
+    }
+
 }

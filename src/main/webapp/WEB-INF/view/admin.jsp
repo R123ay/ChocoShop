@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -15,44 +15,63 @@
         body {
             font-family: 'Noto Sans TC', sans-serif;
             background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0;
+            padding: 0;
             height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        .admin-container {
+        .header {
+            background-color: #343a40;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+        }
+        .navbar {
+            display: flex;
+        }
+        .navbar .nav-link {
+            color: #ffffff;
+            margin-left: 20px;
+            font-weight: 600;
+        }
+        .navbar .nav-link:hover {
+            text-decoration: underline;
+        }
+        .container.admin-container {
             background-color: #fff;
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             max-width: 800px;
             width: 100%;
+            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .admin-title {
             font-weight: 700;
             margin-bottom: 1.5rem;
             text-align: center;
         }
-        .nav-link {
-            font-weight: 600;
-            color: #007bff;
-            margin-right: 10px;
-        }
     </style>
 </head>
 <body>
-    <div class="container admin-container">
-        <h1 class="admin-title">商家後台管理系統</h1>
-        <nav class="nav justify-content-center">
-            <a class="nav-link" href="${pageContext.request.contextPath}/products">上架商品管理</a>
-            <a class="nav-link" href="${pageContext.request.contextPath}/customers">顧客資料管理</a>
-            <a class="nav-link" href="${pageContext.request.contextPath}/orders">訂單管理</a>
-			<a class="nav-link" href="${pageContext.request.contextPath}/">首頁</a>
-			<a class="nav-link" href="${pageContext.request.contextPath}/cart">顧客購物車</a>
+    <div class="header">
+        <div class="admin-title">商家後台管理系統</div>
+        <nav class="navbar">
+            <a class="nav-link" href="<c:url value='/admin/products' />">上架商品管理</a>
+            <a class="nav-link" href="<c:url value='/admin/orders' />">訂單管理</a>
+            <a class="nav-link" href="<c:url value='/' />">首頁官網</a>
+            <a class="nav-link" href="<c:url value='/cart' />">顧客購物車</a>
         </nav>
-        <div class="content mt-4">
-            <!-- 在這裡顯示具體的管理內容，例如商品列表、顧客資料、訂單等 -->
-        </div>
+    </div>
+    <div class="container admin-container">
+        <!-- 其他管理內容可以在這裡顯示 -->
     </div>
 </body>
 </html>
