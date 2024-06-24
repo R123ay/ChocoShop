@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,7 +32,7 @@ import com.chocoshop.model.dto.ProductDto;
 @RequestMapping("/products")
 public class ProductController {
 
-    private static final String UPLOADED_FOLDER = "D:/Java Workspace/ChocoShop/src/main/resources/static/upload/";
+    private static final String UPLOADED_FOLDER = "E:/GitHub/ChocoShop/src/main/resources/static/upload/";
     private static final Logger logger = Logger.getLogger(ProductController.class.getName());
 
     @Autowired

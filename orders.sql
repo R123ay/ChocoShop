@@ -32,7 +32,7 @@ CREATE TABLE `orders` (
   `purchase_date` datetime NOT NULL,
   `total_price` double NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-23','2024-06-23 15:25:00',507),(2,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-23','2024-06-23 15:26:00',0),(3,'aaa','0987654321','123@098','cash_on_delivery','2024-07-03','2024-06-23 15:38:51',384),(4,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-23','2024-06-23 15:56:21',123);
+INSERT INTO `orders` VALUES (1,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-23','2024-06-23 15:25:00',507),(2,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-23','2024-06-23 15:26:00',0),(3,'aaa','0987654321','123@098','cash_on_delivery','2024-07-03','2024-06-23 15:38:51',384),(4,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-23','2024-06-23 15:56:21',123),(5,'123','123456','123@123','cash_on_delivery','2024-06-24','2024-06-24 14:27:12',1331),(6,'123','123456','123@123','cash_on_delivery','2024-06-24','2024-06-24 14:27:16',1331),(7,'123','123456','123@123','cash_on_delivery','2024-06-24','2024-06-24 14:28:10',0),(8,'123','123456789','12@12','cash_on_delivery','2024-06-24','2024-06-24 14:28:46',600);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-24  1:02:43
+-- Dump completed on 2024-06-24 16:12:21

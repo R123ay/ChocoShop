@@ -23,14 +23,19 @@ DROP TABLE IF EXISTS `cart_items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cart_items` (
-  `cart_id` int NOT NULL AUTO_INCREMENT,
-  `customer_id` int NOT NULL,
+  `cart_item_id` int NOT NULL AUTO_INCREMENT,
   `product_id` int NOT NULL,
-  `price` decimal(10,2) NOT NULL,
+  `price` double NOT NULL,
   `quantity` int NOT NULL,
-  `total_price` decimal(10,2) GENERATED ALWAYS AS ((`price` * `quantity`)) STORED,
-  PRIMARY KEY (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `total_price` double NOT NULL,
+  `customer_name` varchar(255) DEFAULT NULL,
+  `customer_phone` varchar(255) DEFAULT NULL,
+  `customer_email` varchar(255) DEFAULT NULL,
+  `payment_method` varchar(255) DEFAULT NULL,
+  `delivery_date` date DEFAULT NULL,
+  `purchase_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`cart_item_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +44,7 @@ CREATE TABLE `cart_items` (
 
 LOCK TABLES `cart_items` WRITE;
 /*!40000 ALTER TABLE `cart_items` DISABLE KEYS */;
-INSERT INTO `cart_items` (`cart_id`, `customer_id`, `product_id`, `price`, `quantity`) VALUES (1,1,101,10.00,2),(2,1,102,15.50,1);
+INSERT INTO `cart_items` VALUES (10,9,1331,1,1331,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `cart_items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-23 11:27:52
+-- Dump completed on 2024-06-24 16:12:21

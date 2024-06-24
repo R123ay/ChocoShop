@@ -110,7 +110,7 @@ public class CartController {
             }
         }).start();
 
-        return "thankyou";
+        return "thankYou";
     }
 
 }

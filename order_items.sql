@@ -16,31 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `cart_items`
+-- Table structure for table `order_items`
 --
 
-DROP TABLE IF EXISTS `cart_items`;
+DROP TABLE IF EXISTS `order_items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cart_items` (
-  `cart_id` int NOT NULL AUTO_INCREMENT,
-  `customer_id` int NOT NULL,
+CREATE TABLE `order_items` (
+  `order_item_id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int NOT NULL,
   `product_id` int NOT NULL,
-  `price` decimal(10,2) NOT NULL,
   `quantity` int NOT NULL,
-  `total_price` decimal(10,2) GENERATED ALWAYS AS ((`price` * `quantity`)) STORED,
-  PRIMARY KEY (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `total_price` double NOT NULL,
+  PRIMARY KEY (`order_item_id`),
+  KEY `order_id` (`order_id`),
+  CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cart_items`
+-- Dumping data for table `order_items`
 --
 
-LOCK TABLES `cart_items` WRITE;
-/*!40000 ALTER TABLE `cart_items` DISABLE KEYS */;
-INSERT INTO `cart_items` (`cart_id`, `customer_id`, `product_id`, `price`, `quantity`) VALUES (1,1,101,10.00,2),(2,1,102,15.50,1);
-/*!40000 ALTER TABLE `cart_items` ENABLE KEYS */;
+LOCK TABLES `order_items` WRITE;
+/*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
+INSERT INTO `order_items` VALUES (1,1,1,1,15),(2,1,9,4,492),(3,3,1,1,15),(4,3,9,1,123),(5,3,9,2,246),(6,4,9,1,123),(7,5,9,1,1331),(8,6,9,1,1331),(9,8,3,1,600);
+/*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-23 11:34:47
+-- Dump completed on 2024-06-24 16:12:21
