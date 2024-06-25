@@ -16,4 +16,5 @@ public class OrderDto {
     private String deliveryDate;
     private String purchaseDate;
     private double totalPrice;
+    private String status;  // 新增的屬性
 }

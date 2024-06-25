@@ -14,6 +14,7 @@ public class CartItemDto {
     private double price;
     private int quantity;
     private double totalPrice;
+    private String productName;  // 新增的屬性
     
     @Override
     public String toString() {
@@ -24,6 +25,7 @@ public class CartItemDto {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ", totalPrice=" + totalPrice +
+                ", productName='" + productName + '\'' +
                 '}';
     }
 }

@@ -70,7 +70,7 @@
             <span class="cart-total-price">$<c:out value="${totalAmount}" /></span>
         </div>
         <div class="text-center mt-5">
-            <button class="btn btn-primary" onclick="window.location.href='<c:url value="/" />'">再次購買</button>
+            <button class="btn btn-primary" onclick="window.location.href='<c:url value="/cart" />'">再次購買</button>
         </div>
     </section>
 </body>

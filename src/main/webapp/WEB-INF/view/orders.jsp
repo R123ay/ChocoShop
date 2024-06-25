@@ -12,7 +12,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <script>
+        $(document).ready(function() {
+            $('#orderTable').DataTable();
+        });
+
         function downloadTableAsCSV(tableId) {
             var table = document.getElementById(tableId);
             var rows = Array.from(table.querySelectorAll('tr'));
@@ -35,11 +41,40 @@
             link.click();
             document.body.removeChild(link);
         }
-
+        
         function showOrderDetails(orderId) {
             $.get("${pageContext.request.contextPath}/admin/orders/" + orderId, function(data) {
                 $('#orderDetailsModal .modal-body').html(data);
                 $('#orderDetailsModal').modal('show');
+            });
+        }
+
+        function enableEditing() {
+            $('.editable').prop('disabled', false);
+            $('#saveOrderDetailsBtn').show();
+            $('#editOrderDetailsBtn').hide();
+        }
+
+        function saveOrderDetails() {
+            var orderId = $('#orderId').val();
+            var status = $('#orderStatusSelect').val();
+            var name = $('#orderName').val();
+            var phone = $('#orderPhone').val();
+            var email = $('#orderEmail').val();
+            var paymentMethod = $('#orderPaymentMethodSelect').val();
+            var deliveryDate = $('#orderDeliveryDate').val();
+
+            $.post("${pageContext.request.contextPath}/admin/orders/update", {
+                orderId: orderId,
+                status: status,
+                name: name,
+                phone: phone,
+                email: email,
+                paymentMethod: paymentMethod,
+                deliveryDate: deliveryDate
+            }, function() {
+                $('#orderDetailsModal').modal('hide');
+                location.reload();
             });
         }
     </script>
@@ -65,6 +100,7 @@
                     <th>總金額</th>
                     <th>購買日期</th>
                     <th>預定到貨日期</th>
+                    <th>訂單狀態</th>
                     <th>詳細資訊</th>
                 </tr>
             </thead>
@@ -79,6 +115,7 @@
                         <td>${order.totalPrice}</td>
                         <td>${order.purchaseDate}</td>
                         <td>${order.deliveryDate}</td>
+                        <td>${order.status}</td>
                         <td><a href="javascript:void(0);" onclick="showOrderDetails(${order.orderId})">查看</a></td>
                     </tr>
                 </c:forEach>
@@ -99,6 +136,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-primary" id="editOrderDetailsBtn" onclick="enableEditing()">編輯</button>
+                    <button type="button" class="btn btn-success" id="saveOrderDetailsBtn" style="display: none;" onclick="saveOrderDetails()">儲存</button>
                 </div>
             </div>
         </div>

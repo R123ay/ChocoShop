@@ -3,8 +3,6 @@ package com.chocoshop.controller;
 import com.chocoshop.model.dto.CartItemDto;
 import com.chocoshop.model.dto.ProductDto;
 
-import jakarta.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,7 +26,7 @@ public class CartController {
         List<ProductDto> products = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProductDto.class));
         model.addAttribute("products", products);
 
-        sql = "SELECT * FROM cart_items";
+        sql = "SELECT c.*, p.name as productName FROM cart_items c JOIN products p ON c.product_id = p.product_id";
         List<CartItemDto> cartItems = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItemDto.class));
         model.addAttribute("cartItems", cartItems);
 
@@ -56,14 +54,14 @@ public class CartController {
 
     @PostMapping("/checkout")
     public String checkout(Model model) {
-        String sql = "SELECT * FROM cart_items";
+        String sql = "SELECT c.*, p.name as productName FROM cart_items c JOIN products p ON c.product_id = p.product_id";
         List<CartItemDto> cartItems = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(CartItemDto.class));
         model.addAttribute("cartItems", cartItems);
 
         double totalAmount = cartItems.stream().mapToDouble(CartItemDto::getTotalPrice).sum();
         model.addAttribute("totalAmount", totalAmount);
 
-        return "confirmPurchase";
+        return "cart";
     }
 
     @PostMapping("/confirm")
@@ -112,5 +110,4 @@ public class CartController {
 
         return "thankYou";
     }
-
 }
