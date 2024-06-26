@@ -62,7 +62,7 @@
                 <c:forEach var="product" items="${products}">
                     <tr>
                         <td>${product.productId}</td>
-                        <td><a href="${pageContext.request.contextPath}/products/${product.productId}">${product.name}</a></td>
+                        <td>${product.name}</td>
                         <td>${product.category}</td>
                         <td>${product.price}</td>
                         <td>

@@ -32,7 +32,7 @@ import com.chocoshop.model.dto.ProductDto;
 @RequestMapping("/products")
 public class ProductController {
 
-    private static final String UPLOADED_FOLDER = "D:/Java Workspace/ChocoShop/src/main/resources/static/upload/";
+    private static final String UPLOADED_FOLDER = "E:/Github/ChocoShop/src/main/resources/static/upload/";
     private static final Logger logger = Logger.getLogger(ProductController.class.getName());
 
     @Autowired
@@ -44,14 +44,6 @@ public class ProductController {
         List<ProductDto> products = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProductDto.class));
         model.addAttribute("products", products);
         return "product";
-    }
-
-    @GetMapping("/{productId}")
-    public String getProductById(@PathVariable int productId, Model model) {
-        String sql = "SELECT * FROM products WHERE product_id = ?";
-        ProductDto product = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(ProductDto.class), productId);
-        model.addAttribute("product", product);
-        return "productDetail";
     }
 
     @GetMapping("/search")

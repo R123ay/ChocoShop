@@ -40,7 +40,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (3,'金箔黑巧克力','精品系列',600.00,'/static/upload/2_dark chocolate_gold.png','2024-06-21 03:28:08','2024-06-23 16:36:45'),(4,'黑巧克力杏仁脆片','精品系列',550.00,'/static/upload/3_dark_chocolate_almond_crisps.png','2024-06-21 03:45:26','2024-06-23 16:37:03'),(5,'黑莓巧克力','精品系列',740.00,'/static/upload/4_dark_chocolate_blackberry.png','2024-06-21 03:48:28','2024-06-23 16:37:23'),(6,'牛奶巧克力榛果禮盒','送禮首選',800.00,'/static/upload/1_milk_chocolate_hazelnut.png','2024-06-21 04:07:04','2024-06-24 06:13:48'),(7,'白巧克力莓果禮盒','送禮首選',850.00,'/static/upload/2_white_chocolate_berry.png','2024-06-21 04:07:04','2024-06-23 16:38:27'),(8,'焦糖牛奶巧克力禮盒','送禮首選',888.00,'/static/upload/3_milk chocolate_caramel.png','2024-06-21 04:21:30','2024-06-23 16:39:38'),(9,'抹茶白巧克力','送禮首選',1331.00,'/static/upload/4_matcha_white_chocolate.png','2024-06-21 06:52:41','2024-06-24 06:03:20');
+INSERT INTO `products` VALUES (3,'金箔黑巧克力','精品系列',600.00,'/static/upload/2_dark chocolate_gold.png','2024-06-21 03:28:08','2024-06-23 16:36:45'),(4,'黑巧克力杏仁脆片','精品系列',550.00,'/static/upload/3_dark_chocolate_almond_crisps.png','2024-06-21 03:45:26','2024-06-23 16:37:03'),(5,'黑莓巧克力','精品系列',740.00,'/static/upload/4_dark_chocolate_blackberry.png','2024-06-21 03:48:28','2024-06-23 16:37:23'),(6,'Product A牛奶巧克力榛果禮盒','送禮首選',800.00,'/static/upload/1_milk_chocolate_hazelnut.png','2024-06-21 04:07:04','2024-06-23 16:38:08'),(7,'白巧克力莓果禮盒','送禮首選',850.00,'/static/upload/2_white_chocolate_berry.png','2024-06-21 04:07:04','2024-06-23 16:38:27'),(8,'焦糖牛奶巧克力禮盒','送禮首選',888.00,'/static/upload/3_milk chocolate_caramel.png','2024-06-21 04:21:30','2024-06-23 16:39:38'),(9,'抹茶白巧克力','送禮首選',1331.00,'/static/upload/4_matcha_white_chocolate.png','2024-06-21 06:52:41','2024-06-23 16:40:20');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-24 16:12:21
+-- Dump completed on 2024-06-26  0:21:36

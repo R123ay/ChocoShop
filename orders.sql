@@ -31,6 +31,7 @@ CREATE TABLE `orders` (
   `delivery_date` date NOT NULL,
   `purchase_date` datetime NOT NULL,
   `total_price` double NOT NULL,
+  `status` varchar(255) DEFAULT '待確認',
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +42,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-23','2024-06-23 15:25:00',507),(2,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-23','2024-06-23 15:26:00',0),(3,'aaa','0987654321','123@098','cash_on_delivery','2024-07-03','2024-06-23 15:38:51',384),(4,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-23','2024-06-23 15:56:21',123),(5,'123','123456','123@123','cash_on_delivery','2024-06-24','2024-06-24 14:27:12',1331),(6,'123','123456','123@123','cash_on_delivery','2024-06-24','2024-06-24 14:27:16',1331),(7,'123','123456','123@123','cash_on_delivery','2024-06-24','2024-06-24 14:28:10',0),(8,'123','123456789','12@12','cash_on_delivery','2024-06-24','2024-06-24 14:28:46',600);
+INSERT INTO `orders` VALUES (1,'藍莓鬆餅','123456789','AAAAA@1253','貨到付款','2024-06-27','2024-06-23 15:25:00',507,'備貨中'),(2,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-23','2024-06-23 15:26:00',0,'待確認'),(3,'aaa','0987654321','123@098','cash_on_delivery','2024-07-03','2024-06-23 15:38:51',384,'待確認'),(4,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-23','2024-06-23 15:56:21',123,'運送中'),(5,'藍莓鬆餅','123456789','AAAAA@1253','cash_on_delivery','2024-06-25','2024-06-25 22:49:15',8874,'待確認'),(6,'aaa','0987654321','123@098','貨到付款','2024-06-26','2024-06-26 00:11:41',4881,'待確認'),(7,'aaa','0987654321','123@098','貨到付款','2024-06-26','2024-06-26 00:12:24',0,'待確認'),(8,'aaa','0987654321','123@098','貨到付款','2024-06-26','2024-06-26 00:12:40',0,'待確認');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-24 16:12:21
+-- Dump completed on 2024-06-26  0:21:36

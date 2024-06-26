@@ -110,4 +110,11 @@ public class CartController {
 
         return "thankYou";
     }
+
+    @GetMapping("/clear")
+    public String clearCart() {
+        String sql = "DELETE FROM cart_items";
+        jdbcTemplate.update(sql);
+        return "redirect:/cart";
+    }
 }

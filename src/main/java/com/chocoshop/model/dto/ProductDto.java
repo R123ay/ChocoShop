@@ -26,4 +26,8 @@ public class ProductDto {
     private String imageUrl;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+	public Object getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

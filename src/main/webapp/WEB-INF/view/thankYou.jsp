@@ -10,10 +10,17 @@
     <title>感謝您的購買</title>
     <link rel="stylesheet" href="<c:url value='/static/css/cart.css' />">
     <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        setTimeout(function() {
-            window.location.href = '<c:url value="/" />';
-        }, 10000);
+	    $(document).ready(function() {
+	        $('#alertModal').modal('show');
+	        setTimeout(function() {
+	            window.location.href = '<c:url value="/" />';
+	        }, 10000);
+	    });
+	    
     </script>
 </head>
 <body>
@@ -70,8 +77,26 @@
             <span class="cart-total-price">$<c:out value="${totalAmount}" /></span>
         </div>
         <div class="text-center mt-5">
-            <button class="btn btn-primary" onclick="window.location.href='<c:url value="/cart" />'">再次購買</button>
+            <button class="btn btn-primary" onclick="window.location.href='<c:url value="/cart/clear" />'">再次購買</button>
         </div>
     </section>
+    
+    <!-- Alert Modal -->
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertModalLabel">感謝您的購買</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    10秒後將自動導向首頁畫面...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">確定</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

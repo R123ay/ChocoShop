@@ -20,10 +20,42 @@
         });
 
         function showConfirmPurchase() {
-            $('#confirmPurchaseModal').modal('show');
+            var cartItems = document.getElementById("cart-items").children.length;
+            if (cartItems === 0) {
+                $('#alertModal').modal('show');
+            } else {
+                $('#confirmPurchaseModal').modal('show');
+            }
         }
-
+		
+        function validatePhoneNumber() {
+            var phone = document.getElementById("phone").value;
+            var phoneError = document.getElementById("phoneError");
+            if (phone.length !== 10 || !/^\d+$/.test(phone)) {
+                phoneError.textContent = '需輸入10位數字';
+                return false;
+            } else {
+                phoneError.textContent = '';
+                return true;
+            }
+        }
+       
+        function validateEmail() {
+            var email = document.getElementById("email").value;
+            var emailError = document.getElementById("emailError");
+            if (!email.includes("@")) {
+                emailError.textContent = '請確認email是否正確';
+                return false;
+            } else {
+                emailError.textContent = '';
+                return true;
+            }
+        }
+        
         function confirmPurchase() {
+            if (!validatePhoneNumber()) {
+                return;
+            }
             document.getElementById("confirmPurchaseForm").submit();
         }
     </script>
@@ -38,26 +70,6 @@
         </nav>
         <h1 class="band-name band-name-large">購物車系統</h1>
     </header>
-    <section class="container content-section">
-        <h2 class="section-header">商品列表</h2>
-        <div class="shop-items" id="shop-items">
-            <c:forEach var="product" items="${products}">
-                <div class="shop-item">
-                    <span class="shop-item-title">${product.name}</span>
-                    <img class="shop-item-image" src="${product.imageUrl}">
-                    <div class="shop-item-details">
-                        <span class="shop-item-price">$${product.price}</span>
-                        <form action="<c:url value='/cart/add' />" method="post">
-                            <input type="hidden" name="productId" value="${product.productId}">
-                            <input type="hidden" name="price" value="${product.price}">
-                            <input class="shop-item-quantity" type="number" name="quantity" value="1" min="1">
-                            <button class="btn btn-primary" type="submit">加入購物車</button>
-                        </form>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-    </section>
     <section class="container content-section">
         <h2 class="section-header">購物車</h2>
         <div class="cart-row">
@@ -90,6 +102,26 @@
             <span class="cart-total-price">$<c:out value="${totalAmount}" /></span>
         </div>
         <button class="btn btn-primary btn-purchase" onclick="showConfirmPurchase()">結帳</button>
+    </section>
+    <section class="container content-section">
+        <h2 class="section-header">商品列表</h2>
+        <div class="shop-items" id="shop-items">
+            <c:forEach var="product" items="${products}">
+                <div class="shop-item">
+                    <span class="shop-item-title">${product.name}</span>
+                    <img class="shop-item-image" src="${product.imageUrl}">
+                    <div class="shop-item-details">
+                        <span class="shop-item-price">$${product.price}</span>
+                        <form action="<c:url value='/cart/add' />" method="post">
+                            <input type="hidden" name="productId" value="${product.productId}">
+                            <input type="hidden" name="price" value="${product.price}">
+                            <input class="shop-item-quantity" type="number" name="quantity" value="1" min="1">
+                            <button class="btn btn-primary" type="submit">加入購物車</button>
+                        </form>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
     </section>
 
     <!-- Confirm Purchase Modal -->
@@ -132,11 +164,13 @@
                         </div>
                         <div>
                             <label for="phone">手機:</label>
-                            <input type="text" id="phone" name="phone" required>
+                            <input type="text" id="phone" name="phone" onblur="validatePhoneNumber()" required>
+                            <span id="phoneError" style="color: red;"></span>
                         </div>
                         <div>
                             <label for="email">電子信箱:</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" onblur="validateEmail()" required>
+                            <span id="emailError" style="color: red;"></span>
                         </div>
                         <div>
                             <label for="paymentMethod">付款方式:</label>
@@ -154,6 +188,23 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
                     <button type="button" class="btn btn-primary" onclick="confirmPurchase()">確認購買</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Alert Modal -->
+    <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alertModalLabel">提醒</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    提醒您，記得加入商品到購物車中喔
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">確定</button>
                 </div>
             </div>
         </div>
