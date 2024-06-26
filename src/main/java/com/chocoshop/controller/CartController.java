@@ -19,7 +19,8 @@ public class CartController {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
+    
+    
     @GetMapping
     public String viewCart(Model model) {
         String sql = "SELECT * FROM products";

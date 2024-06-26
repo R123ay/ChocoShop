@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商家後台管理</title>
+    <title>後台管理</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -35,33 +35,31 @@
             align-items: center;
         }
         .logo-container img {
-            max-width: 180px; /* 設定圖片最大寬度 */
-            margin-right: 10px; /* 文字和圖片之間的間距 */
+            max-width: 180px;
+            margin-right: 10px;
         }
         .admin-title {
-	        font-size: 24px; /* 修改這裡來改變標題的大小 */
-	        font-weight: 700;
-	        text-align: center;
-	        flex: 1; /* 增加這一行，使標題在可用空間內置中 */
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            flex: 1;
         }
         .navbar {
-            display: flex;
+            display: none;
         }
         .navbar .nav-link {
-            color: #ffa140; /* 設置文字顏色 */
+            color: #ffa140;
             font-weight: bold;
             text-decoration: none;
             transition: color 0.3s ease;
         }
         .navbar .nav-link:hover {
-            color: #ffa140; /* 設置文字顏色 */
-            font-weight: bold;
-            text-decoration: underline; /* 滑鼠懸浮時加底線 */
+            color: #ffa140;
+            text-decoration: underline;
         }
         .navbar .nav-link:focus {
-            color: #ffc107; /* 按鈕被選中時顏色 */
-            font-weight: bold;
-            outline: none; /* 移除按鈕被選中時的外框 */
+            color: #ffc107;
+            outline: none;
         }
         .container.admin-container {
             background-color: #fff;
@@ -79,25 +77,113 @@
         .content {
             margin-top: 1.5rem;
         }
+        @media (max-width: 768px) {
+            .header {
+                justify-content: center;
+                position: relative;
+            }
+            .logo-container, .admin-title {
+                margin-top: 10px;
+                text-align: center;
+            }
+            .btn-primary {
+                position: absolute;
+                left: 10px;
+                top: 10px;
+                background-color: #1c0a01; /* 更改按鈕背景顏色 */
+                border-color: #ffa140; /* 更改按鈕邊框顏色 */
+            }
+            .btn-primary:hover {
+                background-color: #ffa140; /* 更改按鈕懸停時的背景顏色 */
+                border-color: #1c0a01; /* 更改按鈕懸停時的邊框顏色 */
+            }
+            .navbar-toggler-icon {
+                display: inline-block;
+                width: 24px;
+                height: 24px;
+                vertical-align: middle;
+                content: "";
+                background: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ffa140' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") center/cover no-repeat;
+            }
+            
+		    .btn-primary:hover .navbar-toggler-icon {
+		        background: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%231c0a01' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") center/cover no-repeat;
+		    }
+		    .btn-primary:focus,
+		    .btn-primary:active,
+		    .btn-primary:focus-visible {
+		        background-color: #1c0a01;
+		        border-color: #ffa140;
+		        box-shadow: none; /* 移除按下時的陰影效果 */
+		    }
+		    .btn-primary:focus .navbar-toggler-icon,
+		    .btn-primary:active .navbar-toggler-icon,
+		    .btn-primary:focus-visible .navbar-toggler-icon {
+			background: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ffa140' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") center/cover no-repeat;
+		    }
+		        /* 新增導覽列背景顏色和文字顏色 */
+		    .navbar {
+		        background-color: #1c0a01; /* 修改背景顏色 */
+		    }
+		    .navbar .nav-link {
+		       
+		    }
+		    .navbar .nav-link:hover {
+		        color: #ffc107; /* 修改懸停時文字顏色 */
+		    }          
+        }
+        .offcanvas-half-width {
+            width: 40%;
+            background-color: #1c0a01;
+            color: #ffa140; /* 修改文字顏色 */
+        	.navbar .nav-link:hover {
+		    	color: #ffc107; /* 修改懸停時文字顏色 */
+		    }          
+		}
+		.offcanvas-half-width .nav-link {
+			color: #ffa140;
+		}
+        .navbar .nav-link:hover {
+            color: #ffa140;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="logo-container">
+            <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <img src="${pageContext.request.contextPath}/static/img/logo2.png" alt="品牌圖示">
-            <div class="admin-title">商家後台管理系統</div>
+            <div class="admin-title">後台管理</div>
         </div>
-        <nav class="navbar">
+        <nav class="navbar d-none d-md-flex">
             <a class="nav-link" href="<c:url value='/products' />">商品上架</a>
             <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
             <a class="nav-link" href="<c:url value='/' />">首頁官網</a>
             <a class="nav-link" href="<c:url value='/cart' />">顧客端-購物車</a>
         </nav>
     </div>
+    <div class="offcanvas offcanvas-start offcanvas-half-width" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">導航選單</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <nav class="navbar-nav">
+                <a class="nav-link" href="<c:url value='/products' />">商品上架</a>
+                <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
+                <a class="nav-link" href="<c:url value='/' />">首頁官網</a>
+                <a class="nav-link" href="<c:url value='/cart' />">顧客端-購物車</a>
+            </nav>
+        </div>
+    </div>
     <div class="container admin-container">
         <div class="content">
             <!-- 其他管理內容可以在這裡顯示 -->
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
