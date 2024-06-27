@@ -17,6 +17,101 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <button class="btn btn-primary-nav d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <img src="${pageContext.request.contextPath}/static/img/logo2.png" alt="品牌圖示">
+            <div class="admin-title">後台管理</div>
+        </div>
+        <nav class="navbar d-none d-md-flex">
+            <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
+            <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/" target="_blank">首頁官網</a>
+            <a class="nav-link" href="<c:url value='/cart' />" target="_blank">顧客購買</a>
+        </nav>
+    </div>
+    <div class="offcanvas offcanvas-start offcanvas-half-width" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">導航選單</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <nav class="navbar-nav">
+                <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
+                <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/" target="_blank">首頁官網</a>
+                <a class="nav-link" href="<c:url value='/cart' />" target="_blank">顧客購買</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container admin-container">
+        <h1 class="mt-4">訂單列表</h1>
+        <section class="container content-section">
+            <form action="${pageContext.request.contextPath}/admin/orders" method="get">
+                <input type="text" name="keyword" placeholder="搜尋電話或信箱">
+                <button type="submit">搜尋</button>
+            </form>
+            <button onclick="downloadTableAsCSV('orderTable')">下載CSV</button>
+            <table id="orderTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>訂單編號</th>
+                        <th>顧客姓名</th>
+                        <th>電話</th>
+                        <th>電子信箱</th>
+                        <th>付款方式</th>
+                        <th>總金額</th>
+                        <th>購買日期</th>
+                        <th>預定到貨日期</th>
+                        <th>訂單狀態</th>
+                        <th>詳細資訊</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="order" items="${orders}">
+                        <tr>
+                            <td>${order.orderId}</td>
+                            <td>${order.name}</td>
+                            <td>${order.phone}</td>
+                            <td>${order.email}</td>
+                            <td>${order.paymentMethod}</td>
+                            <td>${order.totalPrice}</td>
+                            <td>${order.purchaseDate}</td>
+                            <td>${order.deliveryDate}</td>
+                            <td>${order.status}</td>
+                            <td><a href="javascript:void(0);" onclick="showOrderDetails(${order.orderId})">查看</a></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderDetailsModalLabel">訂單詳細資訊</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- 訂單詳細資訊內容會被動態加載進來 -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-primary" id="editOrderDetailsBtn" onclick="enableEditing()">編輯</button>
+                    <button type="button" class="btn btn-success" id="saveOrderDetailsBtn" style="display: none;" onclick="saveOrderDetails()">儲存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
     <script>
         $(document).ready(function() {
             $('#orderTable').DataTable();
@@ -217,99 +312,4 @@
             text-decoration: underline;
         }
     </style>
-</head>
-
-<body>
-    <div class="header">
-        <div class="logo-container">
-            <button class="btn btn-primary-nav d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <img src="${pageContext.request.contextPath}/static/img/logo2.png" alt="品牌圖示">
-            <div class="admin-title">後台管理</div>
-        </div>
-        <nav class="navbar d-none d-md-flex">
-            <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
-            <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
-            <a class="nav-link" href="<c:url value='/' />">首頁官網</a>
-            <a class="nav-link" href="<c:url value='/cart' />">顧客購買</a>
-        </nav>
-    </div>
-    <div class="offcanvas offcanvas-start offcanvas-half-width" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">導航選單</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <nav class="navbar-nav">
-                <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
-                <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
-                <a class="nav-link" href="<c:url value='/' />">首頁官網</a>
-                <a class="nav-link" href="<c:url value='/cart' />">顧客購買</a>
-            </nav>
-        </div>
-    </div>
-
-    <div class="container admin-container">
-        <h1 class="mt-4">訂單列表</h1>
-        <section class="container content-section">
-            <form action="${pageContext.request.contextPath}/admin/orders" method="get">
-                <input type="text" name="keyword" placeholder="搜尋電話或信箱">
-                <button type="submit">搜尋</button>
-            </form>
-            <button onclick="downloadTableAsCSV('orderTable')">下載CSV</button>
-            <table id="orderTable" class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>訂單編號</th>
-                        <th>顧客姓名</th>
-                        <th>電話</th>
-                        <th>電子信箱</th>
-                        <th>付款方式</th>
-                        <th>總金額</th>
-                        <th>購買日期</th>
-                        <th>預定到貨日期</th>
-                        <th>訂單狀態</th>
-                        <th>詳細資訊</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="order" items="${orders}">
-                        <tr>
-                            <td>${order.orderId}</td>
-                            <td>${order.name}</td>
-                            <td>${order.phone}</td>
-                            <td>${order.email}</td>
-                            <td>${order.paymentMethod}</td>
-                            <td>${order.totalPrice}</td>
-                            <td>${order.purchaseDate}</td>
-                            <td>${order.deliveryDate}</td>
-                            <td>${order.status}</td>
-                            <td><a href="javascript:void(0);" onclick="showOrderDetails(${order.orderId})">查看</a></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </section>
-    </div>
-
-    <div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="orderDetailsModalLabel">訂單詳細資訊</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- 訂單詳細資訊內容會被動態加載進來 -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                    <button type="button" class="btn btn-primary" id="editOrderDetailsBtn" onclick="enableEditing()">編輯</button>
-                    <button type="button" class="btn btn-success" id="saveOrderDetailsBtn" style="display: none;" onclick="saveOrderDetails()">儲存</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
 </html>

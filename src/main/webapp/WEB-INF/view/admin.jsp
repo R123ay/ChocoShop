@@ -13,6 +13,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <button class="btn btn-primary-nav d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <img src="${pageContext.request.contextPath}/static/img/logo2.png" alt="品牌圖示">
+            <div class="admin-title">後台管理</div>
+        </div>
+        <nav class="navbar d-none d-md-flex">
+            <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
+            <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/" target="_blank">首頁官網</a>
+            <a class="nav-link" href="<c:url value='/cart' />" target="_blank">顧客購買</a>
+        </nav>
+    </div>
+    <div class="offcanvas offcanvas-start offcanvas-half-width" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">導航選單</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <nav class="navbar-nav">
+                <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
+                <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/" target="_blank">首頁官網</a>
+                <a class="nav-link" href="<c:url value='/cart' />" target="_blank">顧客購買</a>
+            </nav>
+        </div>
+    </div>
+    <div class="container admin-container">
+        <div class="content">
+            <!-- 其他管理內容可以在這裡顯示 -->
+        </div>
+    </div>
+</body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
@@ -150,41 +187,4 @@
             text-decoration: underline;
         }
     </style>
-</head>
-<body>
-    <div class="header">
-        <div class="logo-container">
-            <button class="btn btn-primary-nav d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <img src="${pageContext.request.contextPath}/static/img/logo2.png" alt="品牌圖示">
-            <div class="admin-title">後台管理</div>
-        </div>
-        <nav class="navbar d-none d-md-flex">
-            <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
-            <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
-            <a class="nav-link" href="<c:url value='/' />">首頁顧客購買</a>
-            <a class="nav-link" href="<c:url value='/cart' />">顧客購買</a>
-        </nav>
-    </div>
-    <div class="offcanvas offcanvas-start offcanvas-half-width" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">導航選單</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <nav class="navbar-nav">
-                <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
-                <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
-                <a class="nav-link" href="<c:url value='/' />">首頁官網</a>
-                <a class="nav-link" href="<c:url value='/cart' />">顧客購買</a>
-            </nav>
-        </div>
-    </div>
-    <div class="container admin-container">
-        <div class="content">
-            <!-- 其他管理內容可以在這裡顯示 -->
-        </div>
-    </div>
-</body>
 </html>
