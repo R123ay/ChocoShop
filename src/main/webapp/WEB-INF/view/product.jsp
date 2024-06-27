@@ -3,8 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
-<html lang="zh-TW">
-
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,14 +60,24 @@
         }
     </script>
     <style>
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #1c0a01;
+        .btn-custom {
+            width: 80px;
+        }
+        .hidden-form {
+            display: inline;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            border: none;
+            background: none;
+        }
+        body {
+           font-family: 'Noto Sans TC', sans-serif;
+           background-color: #1c0a01;
+           margin: 0;
+           padding: 0;
+           height: 100vh;
+           display: flex;
+           flex-direction: column;
         }
         .header {
             background-color: #1c0a01;
@@ -125,17 +134,6 @@
         .content {
             margin-top: 1.5rem;
         }
-        /* 以下為產品管理頁面的特定樣式 */
-        .btn-custom {
-            width: 80px;
-        }
-        .hidden-form {
-            display: inline;
-            margin: 0;
-            padding: 0;
-            border: none;
-            background: none;
-        }
         @media (max-width: 768px) {
             .header {
                 justify-content: center;
@@ -165,50 +163,50 @@
                 background: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ffa140' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") center/cover no-repeat;
             }
             
-            .btn-primary-nav:hover .navbar-toggler-icon {
-                background: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%231c0a01' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") center/cover no-repeat;
-            }
-            .btn-primary-nav:focus,
-            .btn-primary-nav:active,
-            .btn-primary-nav:focus-visible {
-                background-color: #1c0a01;
-                border-color: #ffa140;
-                box-shadow: none; /* 移除按下時的陰影效果 */
-            }
-            .btn-primary-nav:focus .navbar-toggler-icon,
-            .btn-primary-nav:active .navbar-toggler-icon,
-            .btn-primary-nav:focus-visible .navbar-toggler-icon {
-            background: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ffa140' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") center/cover no-repeat;
-            }
-                /* 新增導覽列背景顏色和文字顏色 */
-            .navbar {
-                background-color: #1c0a01; /* 修改背景顏色 */
-            }
-            .navbar .nav-link {
-               
-            }
-            .navbar .nav-link:hover {
-                color: #ffc107; /* 修改懸停時文字顏色 */
-            }          
+		    .btn-primary-nav:hover .navbar-toggler-icon {
+		        background: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%231c0a01' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") center/cover no-repeat;
+		    }
+		    .btn-primary-nav:focus,
+		    .btn-primary-nav:active,
+		    .btn-primary-nav:focus-visible {
+		        background-color: #1c0a01;
+		        border-color: #ffa140;
+		        box-shadow: none; /* 移除按下時的陰影效果 */
+		    }
+		    .btn-primary-nav:focus .navbar-toggler-icon,
+		    .btn-primary-nav:active .navbar-toggler-icon,
+		    .btn-primary-nav:focus-visible .navbar-toggler-icon {
+			background: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ffa140' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") center/cover no-repeat;
+		    }
+		        /* 新增導覽列背景顏色和文字顏色 */
+		    .navbar {
+		        background-color: #1c0a01; /* 修改背景顏色 */
+		    }
+		    .navbar .nav-link {
+		       
+		    }
+		    .navbar .nav-link:hover {
+		        color: #ffc107; /* 修改懸停時文字顏色 */
+		    }          
         }
         .offcanvas-half-width {
             width: 40%;
             background-color: #1c0a01;
             color: #ffa140; /* 修改文字顏色 */
-            .navbar .nav-link:hover {
-                color: #ffc107; /* 修改懸停時文字顏色 */
-            }          
-        }
-        .offcanvas-half-width .nav-link {
-            color: #ffa140;
-        }
+        	.navbar .nav-link:hover {
+		    	color: #ffc107; /* 修改懸停時文字顏色 */
+		    }          
+		}
+		.offcanvas-half-width .nav-link {
+			color: #ffa140;
+		}
         .navbar .nav-link:hover {
             color: #ffa140;
             text-decoration: underline;
         }
-
     </style>
 </head>
+
 <body>
     <div class="header">
         <div class="logo-container">
@@ -221,7 +219,7 @@
         <nav class="navbar d-none d-md-flex">
             <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
             <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
-            <a class="nav-link" href="<c:url value='/' />">首頁官網</a>
+            <a class="nav-link" href="<c:url value='/' />">首頁顧客購買</a>
             <a class="nav-link" href="<c:url value='/cart' />">顧客購買</a>
         </nav>
     </div>
@@ -240,60 +238,60 @@
         </div>
     </div>
     <div class="container admin-container">
-        <div class="content">
-            <h1 class="mt-4">產品管理</h1>
-            <div class="d-flex mb-4 align-items-center">
-                <form action="${pageContext.request.contextPath}/admin/products/search" method="get" class="form-inline mr-2 d-flex ml-auto">
-                    <div class="input-group">
-                        <input type="text" name="keyword" class="form-control" placeholder="輸入品名或類別搜尋商品">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">搜尋</button>
-                        </div>
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-success ml-2" data-toggle="modal" data-target="#addProductModal">新增</button>
-                        </div>
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-info ml-2" onclick="downloadTableAsCSV('productTable')">下載 CSV</button>
-                        </div>
+        <h1 class="mt-4">產品管理</h1>
+
+        <div class="d-flex mb-4 align-items-center">
+            <form action="${pageContext.request.contextPath}/admin/products/search" method="get" class="form-inline mr-2 d-flex ml-auto">
+                <div class="input-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="輸入品名或類別搜尋商品">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">搜尋</button>
                     </div>
-                </form>
-            </div>
-            <table class="table" id="productTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>品名</th>
-                        <th>類別</th>
-                        <th>價格</th>
-                        <th>商品照片</th>
-                        <th>上架時間</th>
-                        <th>最新修改時間</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="product" items="${products}">
-                        <tr>
-                            <td>${product.productId}</td>
-                            <td>${product.name}</td>
-                            <td>${product.category}</td>
-                            <td>${product.price}</td>
-                            <td>
-                                <a href="javascript:void(0);" onclick="showImageModal('${pageContext.request.contextPath}/static/upload/${product.imageUrl}')">
-                                    <img src="${pageContext.request.contextPath}/static/upload/${product.imageUrl}" alt="${product.name}" width="100" height="100">
-                                </a>
-                            </td>
-                            <td>${product.createdAt}</td>
-                            <td>${product.updatedAt}</td>
-                            <td>
-                                <button type="button" class="btn btn-primary btn-custom" onclick="showEditModal(${product.productId}, '${product.name}', '${product.category}', ${product.price}, '${product.imageUrl}')">編輯</button>
-                                <a href="${pageContext.request.contextPath}/admin/products/delete/${product.productId}" class="btn btn-danger btn-custom" style="display:inline;">刪除</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-success ml-2" data-toggle="modal" data-target="#addProductModal">新增</button>
+                    </div>
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-info ml-2" onclick="downloadTableAsCSV('productTable')">下載 CSV</button>
+                    </div>
+                </div>
+            </form>
         </div>
+
+        <table class="table" id="productTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>品名</th>
+                    <th>類別</th>
+                    <th>價格</th>
+                    <th>商品照片</th>
+                    <th>上架時間</th>
+                    <th>最新修改時間</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="product" items="${products}">
+                    <tr>
+                        <td>${product.productId}</td>
+                        <td>${product.name}</td>
+                        <td>${product.category}</td>
+                        <td>${product.price}</td>
+                        <td>
+                            <a href="javascript:void(0);" onclick="showImageModal('${pageContext.request.contextPath}${product.imageUrl}')">
+                                <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" width="100" height="100">
+                            </a>
+                        </td>
+                        <td>${product.createdAt}</td>
+                        <td>${product.updatedAt}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-custom" onclick="showEditModal(${product.productId}, '${product.name}', '${product.category}', ${product.price}, '${product.imageUrl}')">編輯</button>
+                            <a href="${pageContext.request.contextPath}/admin/products/delete/${product.productId}" class="btn btn-danger btn-custom" style="display:inline;">刪除</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
     </div>
 
     <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
@@ -340,7 +338,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="editProductForm" action="${pageContext.request.contextPath}/products/update" method="post" enctype="multipart/form-data">
+                    <form id="editProductForm" action="${pageContext.request.contextPath}/admin/products/update" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="edit-id">ID</label>
                             <input type="text" class="form-control" id="edit-id" name="productId" readonly>

@@ -55,9 +55,8 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String addProduct(@Valid @ModelAttribute ProductDto product, BindingResult result, @RequestParam("file") MultipartFile file, Model model) {
+    public String addProduct(@Valid @ModelAttribute ProductDto product, BindingResult result, @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
-            model.addAttribute("errors", result.getAllErrors());
             return "product";
         }
         if (!file.isEmpty()) {
@@ -91,10 +90,9 @@ public class ProductController {
     }
 
     @PostMapping("/update")
-    public String updateProduct(@Valid @ModelAttribute ProductDto product, BindingResult result, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
+    public String updateProduct(@Valid @ModelAttribute ProductDto product, BindingResult result, @RequestParam(value = "file", required = false) MultipartFile file) {
         if (result.hasErrors()) {
-            model.addAttribute("errors", result.getAllErrors());
-            return "product";
+            return "redirect:/admin/products?error=Product name cannot be null or empty";
         }
         if (file != null && !file.isEmpty()) {
             try {
@@ -129,7 +127,6 @@ public class ProductController {
         jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getUpdatedAt(), product.getProductId());
         return "redirect:/admin/products";
     }
-
 
     @GetMapping("/delete/{productId}")
     public String deleteProduct(@PathVariable int productId) {
