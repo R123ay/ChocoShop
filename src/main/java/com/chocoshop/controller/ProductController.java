@@ -29,10 +29,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.chocoshop.model.dto.ProductDto;
 
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/admin/products")
 public class ProductController {
 
-    private static final String UPLOADED_FOLDER = "E:/Github/ChocoShop/src/main/resources/static/upload/";
+    private static final String UPLOADED_FOLDER = "src/main/resources/static/upload/";
     private static final Logger logger = Logger.getLogger(ProductController.class.getName());
 
     @Autowired
@@ -55,8 +55,9 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String addProduct(@Valid @ModelAttribute ProductDto product, BindingResult result, @RequestParam("file") MultipartFile file) {
+    public String addProduct(@Valid @ModelAttribute ProductDto product, BindingResult result, @RequestParam("file") MultipartFile file, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("errors", result.getAllErrors());
             return "product";
         }
         if (!file.isEmpty()) {
@@ -79,20 +80,21 @@ public class ProductController {
                 product.setImageUrl("/static/upload/" + file.getOriginalFilename());
             } catch (IOException e) {
                 logger.log(Level.SEVERE, "Failed to upload file", e);
-                return "redirect:/products?error=Failed to upload file";
+                return "redirect:/admin/products?error=Failed to upload file";
             }
         }
         product.setCreatedAt(LocalDateTime.now());
         product.setUpdatedAt(LocalDateTime.now());
         String sql = "INSERT INTO products (name, category, price, image_url, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getCreatedAt(), product.getUpdatedAt());
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
 
     @PostMapping("/update")
-    public String updateProduct(@Valid @ModelAttribute ProductDto product, BindingResult result, @RequestParam(value = "file", required = false) MultipartFile file) {
+    public String updateProduct(@Valid @ModelAttribute ProductDto product, BindingResult result, @RequestParam(value = "file", required = false) MultipartFile file, Model model) {
         if (result.hasErrors()) {
-            return "redirect:/products?error=Product name cannot be null or empty";
+            model.addAttribute("errors", result.getAllErrors());
+            return "product";
         }
         if (file != null && !file.isEmpty()) {
             try {
@@ -115,7 +117,7 @@ public class ProductController {
                 Thread.sleep(500);  // 不建議使用，但保留原邏輯
             } catch (Exception e) {
                 logger.log(Level.SEVERE, "Failed to upload file", e);
-                return "redirect:/products?error=Failed to upload file";
+                return "redirect:/admin/products?error=Failed to upload file";
             }
         } else {
             String sql = "SELECT image_url FROM products WHERE product_id = ?";
@@ -125,8 +127,9 @@ public class ProductController {
         product.setUpdatedAt(LocalDateTime.now());
         String sql = "UPDATE products SET name = ?, category = ?, price = ?, image_url = ?, updated_at = ? WHERE product_id = ?";
         jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getUpdatedAt(), product.getProductId());
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
+
 
     @GetMapping("/delete/{productId}")
     public String deleteProduct(@PathVariable int productId) {
@@ -136,7 +139,7 @@ public class ProductController {
         
         String sql = "DELETE FROM products WHERE product_id = ?";
         jdbcTemplate.update(sql, productId);
-        return "redirect:/products";
+        return "redirect:/admin/products";
     }
 
     

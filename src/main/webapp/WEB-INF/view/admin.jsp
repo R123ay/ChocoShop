@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 
@@ -12,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
@@ -66,7 +68,7 @@
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
+            max-width: 1200px;
             width: 100%;
             margin-top: 20px;
             flex: 1;
@@ -86,14 +88,14 @@
                 margin-top: 10px;
                 text-align: center;
             }
-            .btn-primary {
+            .btn-primary-nav {
                 position: absolute;
                 left: 10px;
                 top: 10px;
                 background-color: #1c0a01; /* 更改按鈕背景顏色 */
                 border-color: #ffa140; /* 更改按鈕邊框顏色 */
             }
-            .btn-primary:hover {
+            .btn-primary-nav:hover {
                 background-color: #ffa140; /* 更改按鈕懸停時的背景顏色 */
                 border-color: #1c0a01; /* 更改按鈕懸停時的邊框顏色 */
             }
@@ -106,19 +108,19 @@
                 background: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ffa140' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") center/cover no-repeat;
             }
             
-		    .btn-primary:hover .navbar-toggler-icon {
+		    .btn-primary-nav:hover .navbar-toggler-icon {
 		        background: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%231c0a01' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") center/cover no-repeat;
 		    }
-		    .btn-primary:focus,
-		    .btn-primary:active,
-		    .btn-primary:focus-visible {
+		    .btn-primary-nav:focus,
+		    .btn-primary-nav:active,
+		    .btn-primary-nav:focus-visible {
 		        background-color: #1c0a01;
 		        border-color: #ffa140;
 		        box-shadow: none; /* 移除按下時的陰影效果 */
 		    }
-		    .btn-primary:focus .navbar-toggler-icon,
-		    .btn-primary:active .navbar-toggler-icon,
-		    .btn-primary:focus-visible .navbar-toggler-icon {
+		    .btn-primary-nav:focus .navbar-toggler-icon,
+		    .btn-primary-nav:active .navbar-toggler-icon,
+		    .btn-primary-nav:focus-visible .navbar-toggler-icon {
 			background: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ffa140' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") center/cover no-repeat;
 		    }
 		        /* 新增導覽列背景顏色和文字顏色 */
@@ -152,17 +154,17 @@
 <body>
     <div class="header">
         <div class="logo-container">
-            <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <button class="btn btn-primary-nav d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <img src="${pageContext.request.contextPath}/static/img/logo2.png" alt="品牌圖示">
             <div class="admin-title">後台管理</div>
         </div>
         <nav class="navbar d-none d-md-flex">
-            <a class="nav-link" href="<c:url value='/products' />">商品上架</a>
+            <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
             <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
-            <a class="nav-link" href="<c:url value='/' />">首頁官網</a>
-            <a class="nav-link" href="<c:url value='/cart' />">顧客端-購物車</a>
+            <a class="nav-link" href="<c:url value='/' />">首頁顧客購買</a>
+            <a class="nav-link" href="<c:url value='/cart' />">顧客購買</a>
         </nav>
     </div>
     <div class="offcanvas offcanvas-start offcanvas-half-width" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -172,10 +174,10 @@
         </div>
         <div class="offcanvas-body">
             <nav class="navbar-nav">
-                <a class="nav-link" href="<c:url value='/products' />">商品上架</a>
+                <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
                 <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
                 <a class="nav-link" href="<c:url value='/' />">首頁官網</a>
-                <a class="nav-link" href="<c:url value='/cart' />">顧客端-購物車</a>
+                <a class="nav-link" href="<c:url value='/cart' />">顧客購買</a>
             </nav>
         </div>
     </div>
@@ -184,6 +186,5 @@
             <!-- 其他管理內容可以在這裡顯示 -->
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
