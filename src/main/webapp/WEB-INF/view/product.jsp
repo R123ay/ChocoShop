@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>產品管理</title>
+    <title>商品上架</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -167,7 +167,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <img src="${pageContext.request.contextPath}/static/img/logo2.png" alt="品牌圖示">
-            <div class="admin-title">後台管理</div>
+            <div class="admin-title">後台管理-商品上架</div>
         </div>
         <nav class="navbar d-none d-md-flex">
             <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
@@ -191,7 +191,7 @@
         </div>
     </div>
     <div class="container admin-container">
-        <h1 class="mt-4">產品管理</h1>
+        <!-- <h1 class="mt-4">產品管理</h1> -->
 
         <div class="d-flex mb-4 align-items-center">
             <form action="${pageContext.request.contextPath}/admin/products/search" method="get" class="form-inline mr-2 d-flex ml-auto">

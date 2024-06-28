@@ -220,19 +220,16 @@
     </style>
 </head>
 <body>
-    <!-- <div class="header">
+    <div class="header">
         <div class="logo-container">
             <button class="btn btn-primary-nav d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <img src="${pageContext.request.contextPath}/static/img/logo2.png" alt="品牌圖示">
-            <div class="admin-title">後台管理</div>
+            <div class="admin-title">Ruby Choco 商品列表</div>
         </div>
         <nav class="navbar d-none d-md-flex">
-            <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
-            <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
-            <a class="nav-link" href="${pageContext.request.contextPath}/" target="_blank">首頁官網</a>
-            <a class="nav-link" href="<c:url value='/cart' />" target="_blank">顧客購買</a>
+            <a class="nav-link" href="<c:url value='/' />">官網</a>
         </nav>
     </div>
     <div class="offcanvas offcanvas-start offcanvas-half-width" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -242,14 +239,10 @@
         </div>
         <div class="offcanvas-body">
             <nav class="navbar-nav">
-                <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
-                <a class="nav-link" href="<c:url value='/admin/orders' />">客戶訂單</a>
-                <a class="nav-link" href="${pageContext.request.contextPath}/" target="_blank">首頁官網</a>
-                <a class="nav-link" href="<c:url value='/cart' />" target="_blank">顧客購買</a>
-                
+                <a class="nav-link" href="<c:url value='/' />">官網</a>
             </nav>
         </div>
-    </div> -->
+    </div>
     <div class="container admin-container">
         <div class="content">
             <header class="main-header">

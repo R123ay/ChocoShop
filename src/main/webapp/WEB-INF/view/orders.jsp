@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>訂單列表</title>
+    <title>客戶訂單</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -162,7 +162,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <img src="${pageContext.request.contextPath}/static/img/logo2.png" alt="品牌圖示">
-            <div class="admin-title">後台管理</div>
+            <div class="admin-title">後台管理-客戶訂單</div>
         </div>
         <nav class="navbar d-none d-md-flex">
             <a class="nav-link" href="<c:url value='/admin/products' />">商品上架</a>
@@ -187,13 +187,10 @@
     </div>
 
     <div class="container admin-container">
-        <h1 class="mt-4">訂單列表</h1>
+        <!-- <h1 class="mt-4">客戶訂單</h1> -->
+        
         <section class="container content-section">
-            <form action="${pageContext.request.contextPath}/admin/orders" method="get">
-                <input type="text" name="keyword" placeholder="搜尋電話或信箱">
-                <button type="submit">搜尋</button>
-            </form>
-            <button onclick="downloadTableAsCSV('orderTable')">下載CSV</button>
+            <button type="button" class="btn btn-info ml-2"onclick="downloadTableAsCSV('orderTable')">下載CSV</button>
             <table id="orderTable" class="table table-striped">
                 <thead>
                     <tr>
