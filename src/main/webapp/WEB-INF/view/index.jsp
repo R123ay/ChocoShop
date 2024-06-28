@@ -10,6 +10,30 @@
         <title>Ruby Choco</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/index.css">
+        <style>
+          #sec3 .col-12,
+          #sec3 .col-12 img {
+              transition: .5s;
+              /* 圖片和容器的過渡效果為 0.5 秒 */
+          }
+
+          .scaleS {
+              transform: scale(.8);
+              /* 縮小效果 */
+              opacity: .3;
+              /* 不透明度降低 */
+          }
+
+          .scaleB {
+              transform: scale(1.07);
+              /* 放大效果 */
+          }
+
+          .scaleB img {
+              box-shadow: 0 -5px 10px var(--c-nav-05);
+              /* 放大圖片時的陰影效果 */
+          }
+        </style>
     </head>
 
     <body data-bs-spy="scroll" data-bs-target="#navbarMenu" data-bs-offset="200">
@@ -332,31 +356,6 @@ Launch demo modal
             </div>
         </div>
         </div>
-
-        <style>
-            #sec3 .col-12,
-            #sec3 .col-12 img {
-                transition: .5s;
-                /* 圖片和容器的過渡效果為 0.5 秒 */
-            }
-
-            .scaleS {
-                transform: scale(.8);
-                /* 縮小效果 */
-                opacity: .3;
-                /* 不透明度降低 */
-            }
-
-            .scaleB {
-                transform: scale(1.07);
-                /* 放大效果 */
-            }
-
-            .scaleB img {
-                box-shadow: 0 -5px 10px var(--c-nav-05);
-                /* 放大圖片時的陰影效果 */
-            }
-        </style>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- 引入 Bootstrap 的 JavaScript -->
