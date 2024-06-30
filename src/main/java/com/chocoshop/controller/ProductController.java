@@ -84,8 +84,8 @@ public class ProductController {
         }
         product.setCreatedAt(LocalDateTime.now());
         product.setUpdatedAt(LocalDateTime.now());
-        String sql = "INSERT INTO products (name, category, price, image_url, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getCreatedAt(), product.getUpdatedAt());
+        String sql = "INSERT INTO products (name, category, price, image_url, description, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getDescription(), product.getCreatedAt(), product.getUpdatedAt());
         return "redirect:/admin/products";
     }
 
@@ -123,8 +123,8 @@ public class ProductController {
             product.setImageUrl(imageUrl);
         }
         product.setUpdatedAt(LocalDateTime.now());
-        String sql = "UPDATE products SET name = ?, category = ?, price = ?, image_url = ?, updated_at = ? WHERE product_id = ?";
-        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getUpdatedAt(), product.getProductId());
+        String sql = "UPDATE products SET name = ?, category = ?, price = ?, image_url = ?, description = ?, updated_at = ? WHERE product_id = ?";
+        jdbcTemplate.update(sql, product.getName(), product.getCategory(), product.getPrice(), product.getImageUrl(), product.getDescription(), product.getUpdatedAt(), product.getProductId());
         return "redirect:/admin/products";
     }
 
@@ -146,4 +146,12 @@ public class ProductController {
         String sql = "SELECT * FROM products";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProductDto.class));
     }
+    @GetMapping("/product/{id}")
+    @ResponseBody
+    public ProductDto getProduct(@PathVariable int id) {
+        String sql = "SELECT * FROM products WHERE product_id = ?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(ProductDto.class), id);
+    }
+
+
 }

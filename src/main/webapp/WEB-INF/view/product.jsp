@@ -266,29 +266,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="product" items="${products}">
-                                <tr>
-                                    <td>${product.productId}</td>
-                                    <td>${product.name}</td>
-                                    <td>${product.category}</td>
-                                    <td>${product.price}</td>
-                                    <td>
-                                        <a href="javascript:void(0);"
-                                            onclick="showImageModal('${pageContext.request.contextPath}${product.imageUrl}')">
-                                            <img src="${pageContext.request.contextPath}${product.imageUrl}"
-                                                alt="${product.name}" width="100" height="100">
-                                        </a>
-                                    </td>
-                                    <td>${product.createdAt}</td>
-                                    <td>${product.updatedAt}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-custom"
-                                            onclick="showEditModal(${product.productId}, '${product.name}', '${product.category}', ${product.price}, '${product.imageUrl}')">編輯</button>
-                                        <a href="${pageContext.request.contextPath}/admin/products/delete/${product.productId}"
-                                            class="btn btn-danger btn-custom" style="display:inline;">刪除</a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+// 在動態生成表格的部分也要傳遞 description
+<c:forEach var="product" items="${products}">
+<tr>
+    <td>${product.productId}</td>
+    <td>${product.name}</td>
+    <td>${product.category}</td>
+    <td>${product.price}</td>
+    <td>
+        <a href="javascript:void(0);" onclick="showImageModal('${pageContext.request.contextPath}${product.imageUrl}')">
+            <img src="${pageContext.request.contextPath}${product.imageUrl}" alt="${product.name}" width="100" height="100">
+        </a>
+    </td>
+    <td>${product.createdAt}</td>
+    <td>${product.updatedAt}</td>
+    <td>
+        <button type="button" class="btn btn-primary btn-custom" onclick="showEditModal(${product.productId}, '${product.name}', '${product.category}', ${product.price}, '${product.imageUrl}', '${product.description}')">編輯</button>
+        <a href="${pageContext.request.contextPath}/admin/products/delete/${product.productId}" class="btn btn-danger btn-custom" style="display:inline;">刪除</a>
+    </td>
+</tr>
+</c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -365,6 +362,10 @@
                                         <label for="edit-imageUrl">商品照片</label>
                                         <input type="file" class="form-control" id="edit-imageUrl" name="file">
                                     </div>
+				                    <div class="form-group">
+				                        <label for="edit-description">描述</label>
+				                        <textarea class="form-control" id="edit-description" name="description" rows="3" required></textarea>
+				                    </div>                                    
                                     <button type="submit" class="btn btn-success">保存</button>
                                 </form>
                             </div>
@@ -394,13 +395,14 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
             <script>
-                function showEditModal(productId, name, category, price, imageUrl) {
-                    $('#edit-id').val(productId);
-                    $('#edit-name').val(name);
-                    $('#edit-category').val(category);
-                    $('#edit-price').val(price);
-                    $('#editProductModal').modal('show');
-                }
+	            function showEditModal(productId, name, category, price, imageUrl, description) {
+	                $('#edit-id').val(productId);
+	                $('#edit-name').val(name);
+	                $('#edit-category').val(category);
+	                $('#edit-price').val(price);
+	                $('#edit-description').val(description); // 新增
+	                $('#editProductModal').modal('show');
+	            }
 
                 function showImageModal(imageUrl) {
                     var modal = $('#imageModal');
