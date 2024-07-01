@@ -89,28 +89,25 @@ public class CartController {
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("totalAmount", totalAmount);
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(10000);
+        try {
+            String sql = "INSERT INTO orders (name, phone, email, payment_method, delivery_date, purchase_date, total_price) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            jdbcTemplate.update(sql, name, phone, email, paymentMethod, deliveryDate, purchaseDateTime, totalAmount);
 
-                String sql = "INSERT INTO orders (name, phone, email, payment_method, delivery_date, purchase_date, total_price) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                jdbcTemplate.update(sql, name, phone, email, paymentMethod, deliveryDate, purchaseDateTime, totalAmount);
+            int orderId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
-                int orderId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-
-                for (CartItemDto item : cartItems) {
-                    sql = "INSERT INTO order_items (order_id, product_id, quantity, total_price) VALUES (?, ?, ?, ?)";
-                    jdbcTemplate.update(sql, orderId, item.getProductId(), item.getQuantity(), item.getTotalPrice());
-                }
-
-                jdbcTemplate.update("DELETE FROM cart_items");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            for (CartItemDto item : cartItems) {
+                sql = "INSERT INTO order_items (order_id, product_id, quantity, total_price) VALUES (?, ?, ?, ?)";
+                jdbcTemplate.update(sql, orderId, item.getProductId(), item.getQuantity(), item.getTotalPrice());
             }
-        }).start();
+
+            jdbcTemplate.update("DELETE FROM cart_items");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return "thankYou";
     }
+
 
     @GetMapping("/clear")
     public String clearCart() {

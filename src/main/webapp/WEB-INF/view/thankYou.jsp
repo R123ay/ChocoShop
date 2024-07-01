@@ -224,7 +224,7 @@
                                     value="${purchaseDateTime}" readonly>
                             </div>
                         </form>
-                        <h2 class="section-header">購買品項</h2>
+<!--                         <h2 class="section-header">購買品項</h2>
                         <div class="cart-row">
                             <span class="cart-item cart-header cart-column">品名</span>
                             <span class="cart-price cart-header cart-column">單價</span>
@@ -234,7 +234,7 @@
                             <c:forEach var="cartItem" items="${cartItems}">
                                 <div class="cart-row">
                                     <div class="cart-item cart-column">
-                                        <span class="cart-item-title">${cartItem.productId}</span>
+                                        <span class="cart-item-title">${cartItem.productName}</span>
                                     </div>
                                     <span class="cart-price cart-column">$${cartItem.price}</span>
                                     <div class="cart-quantity cart-column">
@@ -242,7 +242,7 @@
                                     </div>
                                 </div>
                             </c:forEach>
-                        </div>
+                        </div> -->
                         <div class="cart-total">
                             <strong class="cart-total-title">總計</strong>
                             <span class="cart-total-price">$
@@ -250,8 +250,7 @@
                             </span>
                         </div>
                         <div class="text-center mt-5">
-                            <button class="btn btn-primary" onclick="window.location.href='<c:url value="
-                                /cart/clear" />'">再次購買</button>
+                            <button class="btn btn-primary" onclick="window.location.href='<c:url value="/cart/clear" />'">再次購買</button>
                         </div>
                     </div>
                 </div>
