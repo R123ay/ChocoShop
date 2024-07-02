@@ -218,11 +218,11 @@
                                 <input type="date" class="form-control" id="deliveryDate" value="${deliveryDate}"
                                     readonly>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="purchaseDateTime" class="form-label"><strong>購買日期時間:</strong></label>
                                 <input type="text" class="form-control" id="purchaseDateTime"
                                     value="${purchaseDateTime}" readonly>
-                            </div>
+                            </div> -->
                         </form>
 <!--                         <h2 class="section-header">購買品項</h2>
                         <div class="cart-row">
@@ -245,9 +245,8 @@
                         </div> -->
                         <div class="cart-total">
                             <strong class="cart-total-title">總計</strong>
-                            <span class="cart-total-price">$
-                                <c:out value="${totalAmount}" />
-                            </span>
+							<span class="cart-total-price">$<fmt:formatNumber value="${totalAmount}" type="number" maxFractionDigits="0" /></span>
+
                         </div>
                         <div class="text-center mt-5">
                             <button class="btn btn-primary" onclick="window.location.href='<c:url value="/cart/clear" />'">再次購買</button>

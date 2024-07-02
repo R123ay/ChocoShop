@@ -333,7 +333,6 @@
                 <div class="cart-total">
                     <strong class="cart-total-title">總計</strong>
 					<span class="cart-total-price">$<fmt:formatNumber value="${totalAmount}" type="number" maxFractionDigits="0" /></span>
-                    </span>
                 </div>
                 <button class="btn btn-primary btn-purchase" onclick="showConfirmPurchase()">結帳</button>
             </section>
@@ -398,8 +397,7 @@
                             </div>
                             <div class="cart-total">
                                 <strong class="cart-total-title">總計</strong>
-								<span class="cart-total-price">$<fmt:formatNumber value="${totalAmount}" type="number" maxFractionDigits="0" /></span>
-                                </span>
+                                <span class="cart-total-price">$<fmt:formatNumber value="${totalAmount}" type="number" maxFractionDigits="0" /></span>
                             </div>
                             <h2 class="section-header">購買訊息</h2>
                             <form id="confirmPurchaseForm" action="<c:url value='/cart/confirm' />" method="post">
@@ -424,12 +422,10 @@
                                         <option value="ATM轉帳">ATM轉帳</option>
                                     </select>
                                 </div>
-<!-- 
-                                <div>
+                                <!-- <div>
                                     <label for="deliveryDate">預定到貨日期:</label>
                                     <input type="date" id="deliveryDate" name="deliveryDate" required>
-                                </div>
- -->                                
+                                </div> -->
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -462,12 +458,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-<!--
     document.addEventListener("DOMContentLoaded", function () {
-        var today = new Date().toISOString().split('T')[0];
-        document.getElementById("deliveryDate").setAttribute("min", today);
+        //var today = new Date().toISOString().split('T')[0];
+        //document.getElementById("deliveryDate").setAttribute("min", today);
     });
--->
+
     function showConfirmPurchase() {
         var cartItems = document.getElementById("cart-items").children.length;
         if (cartItems === 0) {

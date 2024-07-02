@@ -71,7 +71,7 @@ public class CartController {
             @RequestParam String phone,
             @RequestParam String email,
             @RequestParam String paymentMethod,
-            @RequestParam String deliveryDate,
+            //@RequestParam String deliveryDate,
             Model model) {
 
         LocalDateTime purchaseDateTime = LocalDateTime.now();
@@ -84,14 +84,14 @@ public class CartController {
         model.addAttribute("phone", phone);
         model.addAttribute("email", email);
         model.addAttribute("paymentMethod", paymentMethod);
-        model.addAttribute("deliveryDate", deliveryDate);
+        //model.addAttribute("deliveryDate", deliveryDate);
         model.addAttribute("purchaseDateTime", purchaseDateTime);
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("totalAmount", totalAmount);
 
         try {
-            String sql = "INSERT INTO orders (name, phone, email, payment_method, delivery_date, purchase_date, total_price) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            jdbcTemplate.update(sql, name, phone, email, paymentMethod, deliveryDate, purchaseDateTime, totalAmount);
+            String sql = "INSERT INTO orders (name, phone, email, payment_method, purchase_date, total_price) VALUES (?, ?, ?, ?, ?, ?)";
+            jdbcTemplate.update(sql, name, phone, email, paymentMethod, purchaseDateTime, totalAmount);
 
             int orderId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
