@@ -319,8 +319,8 @@
                                     <c:out value="${cartItem.productName}" />
                                 </span>
                             </div>
-                            <span class="cart-price cart-column">$${cartItem.price}</span>
-                            <span class="cart-quantity cart-column">${cartItem.quantity}</span>
+                            <span class="cart-price cart-column">$<fmt:formatNumber value="${cartItem.price}" type="number" maxFractionDigits="0" /></span>
+                            <span class="cart-quantity cart-column"><fmt:formatNumber value="${cartItem.quantity}" type="number" maxFractionDigits="0" /></span>
                             <div class="cart-edit cart-column">
                                 <form action="<c:url value='/cart/remove' />" method="post" style="display:inline;">
                                     <input type="hidden" name="productId" value="${cartItem.productId}">
@@ -332,8 +332,7 @@
                 </div>
                 <div class="cart-total">
                     <strong class="cart-total-title">總計</strong>
-                    <span class="cart-total-price">$
-                        <c:out value="${totalAmount}" />
+					<span class="cart-total-price">$<fmt:formatNumber value="${totalAmount}" type="number" maxFractionDigits="0" /></span>
                     </span>
                 </div>
                 <button class="btn btn-primary btn-purchase" onclick="showConfirmPurchase()">結帳</button>
@@ -390,7 +389,7 @@
                                         <div class="cart-item cart-column">
                                             <span class="cart-item-title">${cartItem.productName}</span>
                                         </div>
-                                        <span class="cart-price cart-column">$${cartItem.price}</span>
+                                        <span class="cart-price cart-column">$<fmt:formatNumber value="${cartItem.price}" type="number" maxFractionDigits="0" /></span>
                                         <div class="cart-quantity cart-column">
                                             <span class="cart-quantity">${cartItem.quantity}</span>
                                         </div>
@@ -399,8 +398,7 @@
                             </div>
                             <div class="cart-total">
                                 <strong class="cart-total-title">總計</strong>
-                                <span class="cart-total-price">$
-                                    <c:out value="${totalAmount}" />
+								<span class="cart-total-price">$<fmt:formatNumber value="${totalAmount}" type="number" maxFractionDigits="0" /></span>
                                 </span>
                             </div>
                             <h2 class="section-header">購買訊息</h2>
@@ -426,10 +424,12 @@
                                         <option value="ATM轉帳">ATM轉帳</option>
                                     </select>
                                 </div>
+<!-- 
                                 <div>
                                     <label for="deliveryDate">預定到貨日期:</label>
                                     <input type="date" id="deliveryDate" name="deliveryDate" required>
                                 </div>
+ -->                                
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -462,11 +462,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+<!--
     document.addEventListener("DOMContentLoaded", function () {
         var today = new Date().toISOString().split('T')[0];
         document.getElementById("deliveryDate").setAttribute("min", today);
     });
-
+-->
     function showConfirmPurchase() {
         var cartItems = document.getElementById("cart-items").children.length;
         if (cartItems === 0) {
