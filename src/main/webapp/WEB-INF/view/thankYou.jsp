@@ -213,7 +213,7 @@
                                 <input type="text" class="form-control" id="paymentMethod" value="${paymentMethod}"
                                     readonly>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="deliveryDate" class="form-label"><strong>預定到貨日期:</strong></label>
                                 <input type="date" class="form-control" id="deliveryDate" value="${deliveryDate}"
                                     readonly>

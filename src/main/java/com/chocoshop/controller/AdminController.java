@@ -54,11 +54,10 @@ public class AdminController {
             @RequestParam String name,
             @RequestParam String phone,
             @RequestParam String email,
-            @RequestParam String paymentMethod,
-            @RequestParam String deliveryDate) {
+            @RequestParam String paymentMethod) {
         
-        String sql = "UPDATE orders SET status = ?, name = ?, phone = ?, email = ?, payment_method = ?, delivery_date = ? WHERE order_id = ?";
-        jdbcTemplate.update(sql, status, name, phone, email, paymentMethod, deliveryDate, orderId);
+        String sql = "UPDATE orders SET status = ?, name = ?, phone = ?, email = ?, payment_method = ?, WHERE order_id = ?";
+        jdbcTemplate.update(sql, status, name, phone, email, paymentMethod, orderId);
     }
 
     private String generateOrderDetailsHtml(OrderDto order, List<OrderItemDto> orderItems) {
@@ -71,7 +70,7 @@ public class AdminController {
             .append("<option value='貨到付款'").append(order.getPaymentMethod().equals("貨到付款") ? " selected" : "").append(">貨到付款</option>")
             .append("<option value='ATM轉帳'").append(order.getPaymentMethod().equals("ATM轉帳") ? " selected" : "").append(">ATM轉帳</option>")
             .append("</select></div>");
-        html.append("<div><strong>預定到貨日期:</strong> <input type='date' class='form-control editable' id='orderDeliveryDate' value='").append(order.getDeliveryDate()).append("' disabled></div>");
+        //html.append("<div><strong>預定到貨日期:</strong> <input type='date' class='form-control editable' id='orderDeliveryDate' value='").append(order.getDeliveryDate()).append("' disabled></div>");
         html.append("<div><strong>訂單狀態:</strong> <select id='orderStatusSelect' class='form-select editable' disabled>")
             .append("<option value='待確認'").append(order.getStatus().equals("待確認") ? " selected" : "").append(">待確認</option>")
             .append("<option value='備貨中'").append(order.getStatus().equals("備貨中") ? " selected" : "").append(">備貨中</option>")
