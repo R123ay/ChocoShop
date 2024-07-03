@@ -266,7 +266,7 @@
                             </tr>
                         </thead>
                         <tbody>
-// 在動態生成表格的部分也要傳遞 description
+
 <c:forEach var="product" items="${products}">
 <tr>
     <td>${product.productId}</td>

@@ -76,10 +76,10 @@
                             <div class="alert alert-success">${success}</div>
                         </c:if>
                         <button type="submit" class="btn btn-primary">登入</button>
-                        <div class="link-container">
+                        <!-- <div class="link-container">
                             <a href="${pageContext.request.contextPath}/register" class="btn btn-link">註冊</a>
                             <a href="${pageContext.request.contextPath}/forgot-password" class="btn btn-link">忘記密碼</a>
-                        </div>
+                        </div> -->
                         <div class="link-container">
                             <a href="${pageContext.request.contextPath}/" class="btn btn-link">回到官網</a>
                         </div>

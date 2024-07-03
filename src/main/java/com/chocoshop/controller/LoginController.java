@@ -41,7 +41,7 @@ public class LoginController {
                 session.setAttribute("user", user);
                 session.setAttribute("customerId", user.getId()); // 將 customerId 儲存在會話中
                 if ("ADMIN".equals(user.getRole())) {
-                    return "redirect:/admin";
+                    return "redirect:/admin/products";
                 } else if ("CUSTOMER".equals(user.getRole())) {
                     return "redirect:/orders/cart";
                 } else {

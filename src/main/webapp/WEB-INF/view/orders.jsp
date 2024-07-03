@@ -238,7 +238,7 @@
                                     <th>付款方式</th>
                                     <th>總金額</th>
                                     <th>購買日期</th>
-                                    <th>預定到貨日期</th>
+                                    
                                     <th>訂單狀態</th>
                                     <th>詳細資訊</th>
                                 </tr>
@@ -253,7 +253,7 @@
                                         <td>${order.paymentMethod}</td>
                                         <td>${order.totalPrice}</td>
                                         <td>${order.purchaseDate}</td>
-                                        <td>${order.deliveryDate}</td>
+                                        
                                         <td>${order.status}</td>
                                         <td><a href="javascript:void(0);"
                                                 onclick="showOrderDetails(${order.orderId})">查看</a></td>
@@ -335,7 +335,7 @@
                     var phone = $('#orderPhone').val();
                     var email = $('#orderEmail').val();
                     var paymentMethod = $('#orderPaymentMethodSelect').val();
-                    var deliveryDate = $('#orderDeliveryDate').val();
+                    //var deliveryDate = $('#orderDeliveryDate').val();
 
                     $.post("${pageContext.request.contextPath}/admin/orders/update", {
                         orderId: orderId,
